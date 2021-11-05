@@ -1,9 +1,11 @@
 ﻿using GenericImporter.Domain.Commands.XptoCommands;
 using GenericImporter.Domain.Core.CommandHandlers;
+using GenericImporter.Domain.Core.Common;
 using GenericImporter.Domain.Core.Mediator;
 using GenericImporter.Domain.Core.Notifications;
+using GenericImporter.Domain.Interfaces;
 using MediatR;
-using System;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -12,9 +14,17 @@ namespace GenericImporter.Domain.CommandHandlers
     public class XptoCommandHandler : CommandHandler,
         IRequestHandler<AddXptoCommand, Unit>
     {
-        public XptoCommandHandler(IMediatorHandler mediatorHandler, 
-                                  INotificationHandler<DomainNotification> notifications) 
-            : base(mediatorHandler, notifications) { }
+        private readonly IMediatorHandler _mediatorHandler;
+        private readonly IXptoRepository _xptoRepository;
+
+        public XptoCommandHandler(IMediatorHandler mediatorHandler,
+                                  INotificationHandler<DomainNotification> notifications, 
+                                  IXptoRepository xptoRepository)
+            : base(mediatorHandler, notifications)
+        {
+            _mediatorHandler = mediatorHandler;
+            _xptoRepository = xptoRepository;
+        }
 
         public async Task<Unit> Handle(AddXptoCommand request, CancellationToken cancellationToken)
         {
@@ -24,7 +34,18 @@ namespace GenericImporter.Domain.CommandHandlers
                 return Unit.Value;
             }
 
-            throw new NotImplementedException();
+            if ((await _xptoRepository.Search(x => x.Name == request.Entity.Name)).Any())
+            {
+                await _mediatorHandler.PublishDomainNotification(new DomainNotification(request.MessageType,
+                    DomainMessages.AlreadyInUse.Format("Name").Message));
+                return Unit.Value;
+            }
+
+            _xptoRepository.Add(request.Entity);
+
+            await Commit(_xptoRepository.UnitOfWork);
+
+            return Unit.Value;
         }
     }
 }
