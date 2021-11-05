@@ -1,5 +1,8 @@
 ﻿using GenericImporter.Application.DataTransferObjects.XptoDTOs;
 using GenericImporter.Application.Interfaces;
+using GenericImporter.Domain.Core.Notifications;
+using GenericImporter.Web.Core.Controllers;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -7,11 +10,13 @@ using System.Threading.Tasks;
 
 namespace GenericImporter.API.Controllers
 {
-    public class XptoController : ApiController
+    public class XptoController : BaseController
     {
         private readonly IXptoAppService _xptoAppService;
 
-        public XptoController(IXptoAppService xptoAppService)
+        public XptoController(INotificationHandler<DomainNotification> notifications, 
+                              IXptoAppService xptoAppService) 
+            : base(notifications)
         {
             _xptoAppService = xptoAppService;
         }
@@ -32,7 +37,7 @@ namespace GenericImporter.API.Controllers
         public async Task<IActionResult> Add([FromBody] AddXptoDTO addXptoDTO)
         {
             await _xptoAppService.Add(addXptoDTO);
-            return Ok();
+            return Response();
         }
     }
 }

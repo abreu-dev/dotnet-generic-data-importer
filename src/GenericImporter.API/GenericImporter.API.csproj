@@ -14,6 +14,7 @@
   <ItemGroup>
     <ProjectReference Include="..\GenericImporter.Application\GenericImporter.Application.csproj" />
     <ProjectReference Include="..\GenericImporter.Infra.CrossCutting.IoC\GenericImporter.Infra.CrossCutting.IoC.csproj" />
+    <ProjectReference Include="..\GenericImporter.Web.Core\GenericImporter.Web.Core.csproj" />
   </ItemGroup>
 
 </Project>

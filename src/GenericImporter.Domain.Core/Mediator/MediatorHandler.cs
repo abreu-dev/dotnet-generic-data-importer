@@ -1,5 +1,6 @@
 ﻿using GenericImporter.Domain.Core.Commands;
 using GenericImporter.Domain.Core.Events;
+using GenericImporter.Domain.Core.Notifications;
 using MediatR;
 using System.Threading.Tasks;
 
@@ -22,6 +23,11 @@ namespace GenericImporter.Domain.Core.Mediator
         public async Task PublishEvent<T>(T @event) where T : Event
         {
             await _mediator.Publish(@event);
+        }
+
+        public async Task PublishDomainNotification<T>(T notification) where T : DomainNotification
+        {
+            await _mediator.Publish(notification);
         }
     }
 }

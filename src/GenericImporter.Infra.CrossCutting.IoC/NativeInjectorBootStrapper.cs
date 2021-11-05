@@ -3,6 +3,7 @@ using GenericImporter.Application.Services;
 using GenericImporter.Domain.CommandHandlers;
 using GenericImporter.Domain.Commands.XptoCommands;
 using GenericImporter.Domain.Core.Mediator;
+using GenericImporter.Domain.Core.Notifications;
 using GenericImporter.Domain.Interfaces;
 using GenericImporter.Infra.Data.Contexts;
 using GenericImporter.Infra.Data.Repositories;
@@ -16,19 +17,24 @@ namespace GenericImporter.Infra.CrossCutting.IoC
     {
         public static void RegisterServices(IServiceCollection services)
         {
-            // Application
-            services.AddScoped<IXptoAppService, XptoAppService>();
-
-            // Domain Bus (Mediator)
+            // Domain - Bus (Mediator)
             services.AddScoped<IMediatorHandler, MediatorHandler>();
+
+            // Domain - Notifications
+            services.AddScoped<INotificationHandler<DomainNotification>, DomainNotificationHandler>();
 
             // Domain - Commands
             services.AddScoped<IRequestHandler<AddXptoCommand, Unit>, XptoCommandHandler>();
 
-            // Infra - Data
+            // Infra Data - Contexts
+            services.AddScoped<DataContext>();
+
+            // Infra Data - Repositories
             services.AddScoped<IXptoRepository, XptoRepository>();
 
-            services.AddScoped<DataContext>();
+            // Application - AppServices
+            services.AddScoped<IXptoAppService, XptoAppService>();
+
         }
     }
 }
