@@ -1,4 +1,4 @@
-﻿using GenericImporter.Application.DataTransferObjects.XptoDTOs;
+﻿using GenericImporter.Application.DataTransferObjects.XptoDtos;
 using GenericImporter.Application.Interfaces;
 using GenericImporter.Domain.Core.Notifications;
 using GenericImporter.Web.Core.Controllers;
@@ -22,21 +22,21 @@ namespace GenericImporter.API.Controllers
         }
 
         [HttpGet]
-        public async Task<IEnumerable<XptoDTO>> Get()
+        public async Task<IEnumerable<XptoDto>> Get()
         {
             return await _xptoAppService.GetAll();
         }
 
         [HttpGet("{id:guid}")]
-        public async Task<XptoDTO> Get(Guid id)
+        public async Task<XptoDto> Get(Guid id)
         {
             return await _xptoAppService.GetById(id);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Add([FromBody] AddXptoDTO addXptoDTO)
+        public async Task<IActionResult> Add([FromBody] AddXptoDto addXptoDto)
         {
-            await _xptoAppService.Add(addXptoDTO);
+            await _xptoAppService.Add(addXptoDto);
             return Response();
         }
     }

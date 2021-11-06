@@ -15,7 +15,7 @@ namespace GenericImporter.Infra.Data.Core.Repositories
         private readonly BaseDbContext _baseDbContext;
         private readonly DbSet<TEntity> _dbSet;
 
-        public Repository(BaseDbContext baseDbContext)
+        protected Repository(BaseDbContext baseDbContext)
         {
             _baseDbContext = baseDbContext;
             _dbSet = baseDbContext.Set<TEntity>();

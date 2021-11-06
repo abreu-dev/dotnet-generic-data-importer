@@ -5,7 +5,7 @@ namespace GenericImporter.Infra.Data.Core.Contexts
 {
     public abstract class BaseDbContext : DbContext, IDbContext
     {
-        public BaseDbContext(DbContextOptions options) : base(options) { }
+        protected BaseDbContext(DbContextOptions options) : base(options) { }
 
         public async Task<bool> Commit()
         {

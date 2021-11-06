@@ -10,8 +10,8 @@ namespace GenericImporter.API.Configurations
         {
             if (services == null) throw new ArgumentNullException(nameof(services));
 
-            services.AddAutoMapper(typeof(DTOToCommandMappingProfile),
-                                   typeof(EntityToDTOMappingProfile));
+            services.AddAutoMapper(typeof(DtoToCommandMappingProfile),
+                                   typeof(EntityToDtoMappingProfile));
         }
     }
 }

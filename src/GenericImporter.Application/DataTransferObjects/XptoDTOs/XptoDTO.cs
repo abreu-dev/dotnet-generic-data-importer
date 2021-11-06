@@ -1,9 +1,9 @@
 ﻿using GenericImporter.Application.Core.DataTransferObjects;
 using System;
 
-namespace GenericImporter.Application.DataTransferObjects.XptoDTOs
+namespace GenericImporter.Application.DataTransferObjects.XptoDtos
 {
-    public class XptoDTO : DataTransferObject
+    public class XptoDto : DataTransferObject
     {
         public Guid Id { get; set; }
         public int Code { get; set; }

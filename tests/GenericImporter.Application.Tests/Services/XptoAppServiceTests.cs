@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using GenericImporter.Application.DataTransferObjects.XptoDTOs;
+using GenericImporter.Application.DataTransferObjects.XptoDtos;
 using GenericImporter.Application.Interfaces;
 using GenericImporter.Application.Services;
 using GenericImporter.Domain.Commands.XptoCommands;
@@ -33,7 +33,7 @@ namespace GenericImporter.Application.Tests.Services
         public async Task Add_ShouldPublishAddXptoCommand()
         {
             // Arrange
-            var addXptoDTO = new AddXptoDTO()
+            var addXptoDto = new AddXptoDto()
             {
                 Name = "Xpto"
             };
@@ -42,14 +42,14 @@ namespace GenericImporter.Application.Tests.Services
             {
                 Entity = new Xpto()
                 {
-                    Name = addXptoDTO.Name
+                    Name = addXptoDto.Name
                 }
             };
 
-            _mockMapper.Setup(e => e.Map<AddXptoCommand>(It.Is<AddXptoDTO>(s => s.Equals(addXptoDTO)))).Returns(command);
+            _mockMapper.Setup(e => e.Map<AddXptoCommand>(It.Is<AddXptoDto>(s => s.Equals(addXptoDto)))).Returns(command);
 
             // Act
-            await _xptoAppService.Add(addXptoDTO);
+            await _xptoAppService.Add(addXptoDto);
 
             // Assert
             _mockMediatorHandler.Verify(e => e.SendCommand(It.Is<AddXptoCommand>(s => s.Equals(command))), Times.Once);

@@ -1,14 +1,14 @@
 ﻿using AutoMapper;
-using GenericImporter.Application.DataTransferObjects.XptoDTOs;
+using GenericImporter.Application.DataTransferObjects.XptoDtos;
 using GenericImporter.Domain.Entities;
 
 namespace GenericImporter.Application.AutoMapper
 {
-    public class EntityToDTOMappingProfile : Profile
+    public class EntityToDtoMappingProfile : Profile
     {
-        public EntityToDTOMappingProfile()
+        public EntityToDtoMappingProfile()
         {
-            CreateMap<Xpto, XptoDTO>();
+            CreateMap<Xpto, XptoDto>();
         }
     }
 }

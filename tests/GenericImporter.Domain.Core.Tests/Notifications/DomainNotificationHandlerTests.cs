@@ -66,7 +66,6 @@ namespace GenericImporter.Domain.Core.Tests.Notifications
         {
             // Arrange
             var domainNotification = new DomainNotification("Key", "Value");
-            var domainNotifications = new List<DomainNotification>() { domainNotification };
             _notifications.Handle(domainNotification, new CancellationToken());
 
             // Act
@@ -85,26 +84,6 @@ namespace GenericImporter.Domain.Core.Tests.Notifications
 
             // Assert
             Assert.False(result);
-        }
-
-        [Fact(DisplayName = "Dispose_ShouldInstanceAnotherDomainNotificationList")]
-        [Trait("Core - Notifications", "DomainNotificationHandler")]
-        public void Dispose_ShouldInstanceAnotherDomainNotificationList()
-        {
-            // Arrange
-            var domainNotification = new DomainNotification("Key", "Value");
-            var domainNotifications = new List<DomainNotification>() { domainNotification };
-            _notifications.Handle(domainNotification, new CancellationToken());
-            var notificationsBeforeDispose = _notifications.GetNotifications();
-
-            // Act
-            _notifications.Dispose();
-
-            // Assert
-            var notificationsAfterDispose = _notifications.GetNotifications();
-            Assert.Single(notificationsBeforeDispose);
-            Assert.Empty(notificationsAfterDispose);
-            Assert.NotEqual(notificationsBeforeDispose, notificationsAfterDispose);
         }
     }
 }

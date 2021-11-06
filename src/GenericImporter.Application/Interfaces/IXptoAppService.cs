@@ -1,7 +1,7 @@
 ﻿using GenericImporter.Application.Core.Interfaces;
-using GenericImporter.Application.DataTransferObjects.XptoDTOs;
+using GenericImporter.Application.DataTransferObjects.XptoDtos;
 
 namespace GenericImporter.Application.Interfaces
 {
-    public interface IXptoAppService : IAppService<XptoDTO, AddXptoDTO> { }
+    public interface IXptoAppService : IAppService<XptoDto, AddXptoDto> { }
 }

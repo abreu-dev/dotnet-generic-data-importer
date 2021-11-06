@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using GenericImporter.Application.Core.Services;
-using GenericImporter.Application.DataTransferObjects.XptoDTOs;
+using GenericImporter.Application.DataTransferObjects.XptoDtos;
 using GenericImporter.Application.Interfaces;
 using GenericImporter.Domain.Commands.XptoCommands;
 using GenericImporter.Domain.Core.Mediator;
@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace GenericImporter.Application.Services
 {
-    public class XptoAppService : AppService<XptoDTO, AddXptoDTO, Xpto>,
+    public class XptoAppService : AppService<XptoDto, AddXptoDto, Xpto>,
         IXptoAppService
     {
         private readonly IMapper _mapper;
@@ -25,9 +25,9 @@ namespace GenericImporter.Application.Services
             _mediator = mediator;
         }
 
-        public override async Task Add(AddXptoDTO addXptoDTO)
+        public override async Task Add(AddXptoDto addXptoDto)
         {
-            await _mediator.SendCommand(_mapper.Map<AddXptoCommand>(addXptoDTO));
+            await _mediator.SendCommand(_mapper.Map<AddXptoCommand>(addXptoDto));
         }
     }
 }
