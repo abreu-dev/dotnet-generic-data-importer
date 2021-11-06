@@ -1,5 +1,0 @@
-﻿C:\Users\Gabriel\Desktop\Repos\dotnet-generic-importer\backend\src\GenericImporter.Domain\CommandHandlers\XptoCommandHandler.cs
-C:\Users\Gabriel\Desktop\Repos\dotnet-generic-importer\backend\src\GenericImporter.Domain\Commands\XptoCommands\AddXptoCommand.cs
-C:\Users\Gabriel\Desktop\Repos\dotnet-generic-importer\backend\src\GenericImporter.Domain\Entities\Xpto.cs
-C:\Users\Gabriel\Desktop\Repos\dotnet-generic-importer\backend\src\GenericImporter.Domain\Interfaces\IXptoRepository.cs
-C:\Users\Gabriel\Desktop\Repos\dotnet-generic-importer\backend\src\GenericImporter.Domain\Validators\XptoValidators\AddXptoCommandValidator.cs

@@ -1,3 +1,0 @@
-﻿C:\Users\Gabriel\Desktop\Repos\dotnet-generic-importer\backend\src\GenericImporter.Application.Core\DataTransferObjects\DataTransferObject.cs
-C:\Users\Gabriel\Desktop\Repos\dotnet-generic-importer\backend\src\GenericImporter.Application.Core\Interfaces\IAppService.cs
-C:\Users\Gabriel\Desktop\Repos\dotnet-generic-importer\backend\src\GenericImporter.Application.Core\Services\AppService.cs

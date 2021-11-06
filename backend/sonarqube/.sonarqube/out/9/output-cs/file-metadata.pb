@@ -1,9 +1,0 @@
-~
-uC:\Users\Gabriel\Desktop\Repos\dotnet-generic-importer\backend\src\GenericImporter.Infra.Data\Contexts\DataContext.csutf-8~
-uC:\Users\Gabriel\Desktop\Repos\dotnet-generic-importer\backend\src\GenericImporter.Infra.Data\Mappings\XptoMapping.csutf-8å
-ÇC:\Users\Gabriel\Desktop\Repos\dotnet-generic-importer\backend\src\GenericImporter.Infra.Data\Migrations\20211105020653_Initial.csutf-8ó
-ãC:\Users\Gabriel\Desktop\Repos\dotnet-generic-importer\backend\src\GenericImporter.Infra.Data\Migrations\20211105020653_Initial.Designer.csutf-8ê
-ÑC:\Users\Gabriel\Desktop\Repos\dotnet-generic-importer\backend\src\GenericImporter.Infra.Data\Migrations\DataContextModelSnapshot.csutf-8Ö
-|C:\Users\Gabriel\Desktop\Repos\dotnet-generic-importer\backend\src\GenericImporter.Infra.Data\Repositories\XptoRepository.csutf-8©
-ùC:\Users\Gabriel\Desktop\Repos\dotnet-generic-importer\backend\src\GenericImporter.Infra.Data\obj\Debug\net5.0\.NETCoreApp,Version=v5.0.AssemblyAttributes.csutf-8•
-ôC:\Users\Gabriel\Desktop\Repos\dotnet-generic-importer\backend\src\GenericImporter.Infra.Data\obj\Debug\net5.0\GenericImporter.Infra.Data.AssemblyInfo.csutf-8
