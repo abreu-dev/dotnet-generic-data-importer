@@ -1,6 +1,7 @@
 ﻿using GenericImporter.Application.Interfaces;
 using GenericImporter.Application.Services;
 using GenericImporter.Domain.CommandHandlers;
+using GenericImporter.Domain.Commands.ImportLayoutCommands;
 using GenericImporter.Domain.Commands.XptoCommands;
 using GenericImporter.Domain.Core.Mediator;
 using GenericImporter.Domain.Core.Notifications;
@@ -26,14 +27,18 @@ namespace GenericImporter.Infra.CrossCutting.IoC
             // Domain - Commands
             services.AddScoped<IRequestHandler<AddXptoCommand, Unit>, XptoCommandHandler>();
 
+            services.AddScoped<IRequestHandler<AddImportLayoutCommand, Unit>, ImportLayoutCommandHandler>();
+
             // Infra Data - Contexts
             services.AddScoped<DataContext>();
 
             // Infra Data - Repositories
             services.AddScoped<IXptoRepository, XptoRepository>();
+            services.AddScoped<IImportLayoutRepository, ImportLayoutRepository>();
 
             // Application - AppServices
             services.AddScoped<IXptoAppService, XptoAppService>();
+            services.AddScoped<IImportLayoutAppService, ImportLayoutAppService>();
 
         }
     }

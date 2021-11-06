@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using GenericImporter.Application.DataTransferObjects.ImportLayoutDTOs;
 using GenericImporter.Application.DataTransferObjects.XptoDtos;
 using GenericImporter.Domain.Entities;
 
@@ -9,6 +10,7 @@ namespace GenericImporter.Application.AutoMapper
         public EntityToDtoMappingProfile()
         {
             CreateMap<Xpto, XptoDto>();
+            CreateMap<ImportLayout, ImportLayoutDto>();
         }
     }
 }
