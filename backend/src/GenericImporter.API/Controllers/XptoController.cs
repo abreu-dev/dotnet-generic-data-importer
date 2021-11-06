@@ -28,7 +28,7 @@ namespace GenericImporter.API.Controllers
         }
 
         [HttpGet("{id:guid}")]
-        public async Task<XptoDto> Get(Guid id)
+        public async Task<XptoDto> GetById(Guid id)
         {
             return await _xptoAppService.GetById(id);
         }
