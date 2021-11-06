@@ -18,7 +18,7 @@ namespace GenericImporter.Infra.Data.Mappings
                 .Metadata.SetAfterSaveBehavior(PropertySaveBehavior.Ignore);
 
             builder.Property(x => x.Name)
-                .HasColumnName("Nome")
+                .HasColumnName("Name")
                 .IsRequired();
         }
     }
