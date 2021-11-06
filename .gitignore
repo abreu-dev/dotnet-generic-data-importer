@@ -348,3 +348,9 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
+
+# Sonarqube
+backend/sonarqube/.sonarqube/
+
+# Coverage Collector
+coverage.opencover.xml
