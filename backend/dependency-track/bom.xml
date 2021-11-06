@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<bom xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" serialNumber="urn:uuid:19d008fb-debb-4064-b512-93af10b133c9" version="1" xmlns="http://cyclonedx.org/schema/bom/1.3">
+<bom xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" serialNumber="urn:uuid:7e39e4c5-58b1-4842-a497-2d1545b08b51" version="1" xmlns="http://cyclonedx.org/schema/bom/1.3">
   <metadata>
     <tools>
       <tool>
@@ -127,6 +127,30 @@
         </license>
       </licenses>
       <purl>pkg:nuget/coverlet.collector@3.1.0</purl>
+      <externalReferences>
+        <reference type="website">
+          <url>https://github.com/coverlet-coverage/coverlet</url>
+        </reference>
+        <reference type="vcs">
+          <url>https://github.com/coverlet-coverage/coverlet.git</url>
+        </reference>
+      </externalReferences>
+    </component>
+    <component type="library" bom-ref="pkg:nuget/coverlet.msbuild@3.1.0">
+      <publisher>tonerdo</publisher>
+      <name>coverlet.msbuild</name>
+      <version>3.1.0</version>
+      <description>Coverlet is a cross platform code coverage library for .NET, with support for line, branch and method coverage.</description>
+      <scope>excluded</scope>
+      <hashes>
+        <hash alg="SHA-512">C2F29F7CBC64DCB30B17F117F99011A4401E912864187B5A622AE40B41554C73FD6AFA8C4A37A8046EE27C1C9B2FD1A2C351BB9615A63735994AFC0A3B5185A8</hash>
+      </hashes>
+      <licenses>
+        <license>
+          <id>MIT</id>
+        </license>
+      </licenses>
+      <purl>pkg:nuget/coverlet.msbuild@3.1.0</purl>
       <externalReferences>
         <reference type="website">
           <url>https://github.com/coverlet-coverage/coverlet</url>
@@ -7089,6 +7113,7 @@ When using NuGet 3.x this package requires at least version 3.4.</description>
       <dependency ref="pkg:nuget/Microsoft.AspNetCore.Mvc.Core@2.2.5" />
       <dependency ref="pkg:nuget/Microsoft.EntityFrameworkCore.Tools@5.0.11" />
       <dependency ref="pkg:nuget/coverlet.collector@3.0.2" />
+      <dependency ref="pkg:nuget/coverlet.msbuild@3.1.0" />
       <dependency ref="pkg:nuget/Microsoft.NET.Test.Sdk@16.9.4" />
       <dependency ref="pkg:nuget/Moq@4.16.1" />
       <dependency ref="pkg:nuget/xunit@2.4.1" />
@@ -7119,6 +7144,7 @@ When using NuGet 3.x this package requires at least version 3.4.</description>
     </dependency>
     <dependency ref="pkg:nuget/coverlet.collector@3.0.2" />
     <dependency ref="pkg:nuget/coverlet.collector@3.0.2" />
+    <dependency ref="pkg:nuget/coverlet.msbuild@3.1.0" />
     <dependency ref="pkg:nuget/FluentValidation@10.3.4" />
     <dependency ref="pkg:nuget/Humanizer.Core@2.8.26" />
     <dependency ref="pkg:nuget/MediatR.Extensions.Microsoft.DependencyInjection@9.0.0">
@@ -7337,17 +7363,17 @@ When using NuGet 3.x this package requires at least version 3.4.</description>
     <dependency ref="pkg:nuget/Microsoft.Extensions.Options@2.2.0">
       <dependency ref="pkg:nuget/Microsoft.Extensions.DependencyInjection.Abstractions@2.2.0" />
       <dependency ref="pkg:nuget/Microsoft.Extensions.Primitives@2.2.0" />
+      <dependency ref="pkg:nuget/System.ComponentModel.Annotations@4.5.0" />
     </dependency>
     <dependency ref="pkg:nuget/Microsoft.Extensions.Options@2.2.0">
       <dependency ref="pkg:nuget/Microsoft.Extensions.DependencyInjection.Abstractions@2.2.0" />
       <dependency ref="pkg:nuget/Microsoft.Extensions.Primitives@2.2.0" />
-      <dependency ref="pkg:nuget/System.ComponentModel.Annotations@4.5.0" />
     </dependency>
+    <dependency ref="pkg:nuget/Microsoft.Extensions.Primitives@2.2.0" />
     <dependency ref="pkg:nuget/Microsoft.Extensions.Primitives@2.2.0">
       <dependency ref="pkg:nuget/System.Memory@4.5.1" />
       <dependency ref="pkg:nuget/System.Runtime.CompilerServices.Unsafe@4.5.1" />
     </dependency>
-    <dependency ref="pkg:nuget/Microsoft.Extensions.Primitives@2.2.0" />
     <dependency ref="pkg:nuget/Microsoft.Identity.Client@4.14.0">
       <dependency ref="pkg:nuget/Microsoft.CSharp@4.0.1" />
       <dependency ref="pkg:nuget/System.ComponentModel.TypeConverter@4.3.0" />
@@ -7478,30 +7504,6 @@ When using NuGet 3.x this package requires at least version 3.4.</description>
     <dependency ref="pkg:nuget/Newtonsoft.Json@9.0.1">
       <dependency ref="pkg:nuget/Microsoft.CSharp@4.0.1" />
       <dependency ref="pkg:nuget/System.Collections@4.0.11" />
-      <dependency ref="pkg:nuget/System.Diagnostics.Debug@4.0.11" />
-      <dependency ref="pkg:nuget/System.Dynamic.Runtime@4.0.11" />
-      <dependency ref="pkg:nuget/System.Globalization@4.0.11" />
-      <dependency ref="pkg:nuget/System.IO@4.1.0" />
-      <dependency ref="pkg:nuget/System.Linq@4.1.0" />
-      <dependency ref="pkg:nuget/System.Linq.Expressions@4.1.0" />
-      <dependency ref="pkg:nuget/System.ObjectModel@4.0.12" />
-      <dependency ref="pkg:nuget/System.Reflection@4.1.0" />
-      <dependency ref="pkg:nuget/System.Reflection.Extensions@4.0.1" />
-      <dependency ref="pkg:nuget/System.Resources.ResourceManager@4.0.1" />
-      <dependency ref="pkg:nuget/System.Runtime@4.1.0" />
-      <dependency ref="pkg:nuget/System.Runtime.Extensions@4.1.0" />
-      <dependency ref="pkg:nuget/System.Runtime.Serialization.Primitives@4.1.1" />
-      <dependency ref="pkg:nuget/System.Text.Encoding@4.0.11" />
-      <dependency ref="pkg:nuget/System.Text.Encoding.Extensions@4.0.11" />
-      <dependency ref="pkg:nuget/System.Text.RegularExpressions@4.1.0" />
-      <dependency ref="pkg:nuget/System.Threading@4.0.11" />
-      <dependency ref="pkg:nuget/System.Threading.Tasks@4.0.11" />
-      <dependency ref="pkg:nuget/System.Xml.ReaderWriter@4.0.11" />
-      <dependency ref="pkg:nuget/System.Xml.XDocument@4.0.11" />
-    </dependency>
-    <dependency ref="pkg:nuget/Newtonsoft.Json@9.0.1">
-      <dependency ref="pkg:nuget/Microsoft.CSharp@4.0.1" />
-      <dependency ref="pkg:nuget/System.Collections@4.0.11" />
       <dependency ref="pkg:nuget/System.ComponentModel.TypeConverter@4.3.0" />
       <dependency ref="pkg:nuget/System.Diagnostics.Debug@4.0.11" />
       <dependency ref="pkg:nuget/System.Dynamic.Runtime@4.0.11" />
@@ -7526,6 +7528,30 @@ When using NuGet 3.x this package requires at least version 3.4.</description>
       <dependency ref="pkg:nuget/System.Xml.ReaderWriter@4.0.11" />
       <dependency ref="pkg:nuget/System.Xml.XDocument@4.0.11" />
       <dependency ref="pkg:nuget/System.Xml.XmlDocument@4.3.0" />
+    </dependency>
+    <dependency ref="pkg:nuget/Newtonsoft.Json@9.0.1">
+      <dependency ref="pkg:nuget/Microsoft.CSharp@4.0.1" />
+      <dependency ref="pkg:nuget/System.Collections@4.0.11" />
+      <dependency ref="pkg:nuget/System.Diagnostics.Debug@4.0.11" />
+      <dependency ref="pkg:nuget/System.Dynamic.Runtime@4.0.11" />
+      <dependency ref="pkg:nuget/System.Globalization@4.0.11" />
+      <dependency ref="pkg:nuget/System.IO@4.1.0" />
+      <dependency ref="pkg:nuget/System.Linq@4.1.0" />
+      <dependency ref="pkg:nuget/System.Linq.Expressions@4.1.0" />
+      <dependency ref="pkg:nuget/System.ObjectModel@4.0.12" />
+      <dependency ref="pkg:nuget/System.Reflection@4.1.0" />
+      <dependency ref="pkg:nuget/System.Reflection.Extensions@4.0.1" />
+      <dependency ref="pkg:nuget/System.Resources.ResourceManager@4.0.1" />
+      <dependency ref="pkg:nuget/System.Runtime@4.1.0" />
+      <dependency ref="pkg:nuget/System.Runtime.Extensions@4.1.0" />
+      <dependency ref="pkg:nuget/System.Runtime.Serialization.Primitives@4.1.1" />
+      <dependency ref="pkg:nuget/System.Text.Encoding@4.0.11" />
+      <dependency ref="pkg:nuget/System.Text.Encoding.Extensions@4.0.11" />
+      <dependency ref="pkg:nuget/System.Text.RegularExpressions@4.1.0" />
+      <dependency ref="pkg:nuget/System.Threading@4.0.11" />
+      <dependency ref="pkg:nuget/System.Threading.Tasks@4.0.11" />
+      <dependency ref="pkg:nuget/System.Xml.ReaderWriter@4.0.11" />
+      <dependency ref="pkg:nuget/System.Xml.XDocument@4.0.11" />
     </dependency>
     <dependency ref="pkg:nuget/NuGet.Frameworks@5.0.0" />
     <dependency ref="pkg:nuget/runtime.debian.8-x64.runtime.native.System.Security.Cryptography.OpenSsl@4.3.0" />
@@ -7589,6 +7615,7 @@ When using NuGet 3.x this package requires at least version 3.4.</description>
     <dependency ref="pkg:nuget/System.AppContext@4.3.0">
       <dependency ref="pkg:nuget/System.Runtime@4.1.0" />
     </dependency>
+    <dependency ref="pkg:nuget/System.Buffers@4.3.0" />
     <dependency ref="pkg:nuget/System.Buffers@4.3.0">
       <dependency ref="pkg:nuget/System.Diagnostics.Debug@4.0.11" />
       <dependency ref="pkg:nuget/System.Diagnostics.Tracing@4.3.0" />
@@ -7596,7 +7623,6 @@ When using NuGet 3.x this package requires at least version 3.4.</description>
       <dependency ref="pkg:nuget/System.Runtime@4.1.0" />
       <dependency ref="pkg:nuget/System.Threading@4.0.11" />
     </dependency>
-    <dependency ref="pkg:nuget/System.Buffers@4.3.0" />
     <dependency ref="pkg:nuget/System.Collections.Concurrent@4.3.0">
       <dependency ref="pkg:nuget/System.Collections@4.0.11" />
       <dependency ref="pkg:nuget/System.Diagnostics.Debug@4.0.11" />
@@ -7686,7 +7712,6 @@ When using NuGet 3.x this package requires at least version 3.4.</description>
       <dependency ref="pkg:nuget/System.Runtime@4.1.0" />
     </dependency>
     <dependency ref="pkg:nuget/System.Diagnostics.DiagnosticSource@4.3.0" />
-    <dependency ref="pkg:nuget/System.Diagnostics.DiagnosticSource@4.3.0" />
     <dependency ref="pkg:nuget/System.Diagnostics.DiagnosticSource@4.3.0">
       <dependency ref="pkg:nuget/System.Collections@4.0.11" />
       <dependency ref="pkg:nuget/System.Diagnostics.Tracing@4.3.0" />
@@ -7694,6 +7719,7 @@ When using NuGet 3.x this package requires at least version 3.4.</description>
       <dependency ref="pkg:nuget/System.Runtime@4.1.0" />
       <dependency ref="pkg:nuget/System.Threading@4.0.11" />
     </dependency>
+    <dependency ref="pkg:nuget/System.Diagnostics.DiagnosticSource@4.3.0" />
     <dependency ref="pkg:nuget/System.Diagnostics.Tools@4.0.1">
       <dependency ref="pkg:nuget/Microsoft.NETCore.Platforms@1.1.0" />
       <dependency ref="pkg:nuget/Microsoft.NETCore.Targets@1.1.0" />
@@ -8032,21 +8058,21 @@ When using NuGet 3.x this package requires at least version 3.4.</description>
       <dependency ref="pkg:nuget/System.Reflection.Primitives@4.0.1" />
       <dependency ref="pkg:nuget/System.Runtime@4.1.0" />
     </dependency>
-    <dependency ref="pkg:nuget/System.Reflection.Emit@4.0.1">
-      <dependency ref="pkg:nuget/System.IO@4.1.0" />
-      <dependency ref="pkg:nuget/System.Reflection@4.1.0" />
-      <dependency ref="pkg:nuget/System.Reflection.Emit.ILGeneration@4.0.1" />
-      <dependency ref="pkg:nuget/System.Reflection.Primitives@4.0.1" />
-      <dependency ref="pkg:nuget/System.Runtime@4.1.0" />
-    </dependency>
-    <dependency ref="pkg:nuget/System.Reflection.Emit@4.0.1">
-      <dependency ref="pkg:nuget/System.IO@4.1.0" />
-      <dependency ref="pkg:nuget/System.Reflection@4.1.0" />
-      <dependency ref="pkg:nuget/System.Reflection.Emit.ILGeneration@4.0.1" />
-      <dependency ref="pkg:nuget/System.Reflection.Primitives@4.0.1" />
-      <dependency ref="pkg:nuget/System.Runtime@4.1.0" />
-    </dependency>
     <dependency ref="pkg:nuget/System.Reflection.Emit@4.0.1" />
+    <dependency ref="pkg:nuget/System.Reflection.Emit@4.0.1">
+      <dependency ref="pkg:nuget/System.IO@4.1.0" />
+      <dependency ref="pkg:nuget/System.Reflection@4.1.0" />
+      <dependency ref="pkg:nuget/System.Reflection.Emit.ILGeneration@4.0.1" />
+      <dependency ref="pkg:nuget/System.Reflection.Primitives@4.0.1" />
+      <dependency ref="pkg:nuget/System.Runtime@4.1.0" />
+    </dependency>
+    <dependency ref="pkg:nuget/System.Reflection.Emit@4.0.1">
+      <dependency ref="pkg:nuget/System.IO@4.1.0" />
+      <dependency ref="pkg:nuget/System.Reflection@4.1.0" />
+      <dependency ref="pkg:nuget/System.Reflection.Emit.ILGeneration@4.0.1" />
+      <dependency ref="pkg:nuget/System.Reflection.Primitives@4.0.1" />
+      <dependency ref="pkg:nuget/System.Runtime@4.1.0" />
+    </dependency>
     <dependency ref="pkg:nuget/System.Reflection.Extensions@4.0.1">
       <dependency ref="pkg:nuget/Microsoft.NETCore.Platforms@1.1.0" />
       <dependency ref="pkg:nuget/Microsoft.NETCore.Targets@1.1.0" />
@@ -8218,6 +8244,7 @@ When using NuGet 3.x this package requires at least version 3.4.</description>
       <dependency ref="pkg:nuget/runtime.native.System.Security.Cryptography.Apple@4.3.0" />
       <dependency ref="pkg:nuget/runtime.native.System.Security.Cryptography.OpenSsl@4.3.0" />
     </dependency>
+    <dependency ref="pkg:nuget/System.Security.Cryptography.Cng@4.3.0" />
     <dependency ref="pkg:nuget/System.Security.Cryptography.Cng@4.3.0">
       <dependency ref="pkg:nuget/Microsoft.NETCore.Platforms@1.1.0" />
       <dependency ref="pkg:nuget/System.IO@4.1.0" />
@@ -8231,7 +8258,6 @@ When using NuGet 3.x this package requires at least version 3.4.</description>
       <dependency ref="pkg:nuget/System.Security.Cryptography.Primitives@4.3.0" />
       <dependency ref="pkg:nuget/System.Text.Encoding@4.0.11" />
     </dependency>
-    <dependency ref="pkg:nuget/System.Security.Cryptography.Cng@4.3.0" />
     <dependency ref="pkg:nuget/System.Security.Cryptography.Csp@4.3.0">
       <dependency ref="pkg:nuget/Microsoft.NETCore.Platforms@1.1.0" />
       <dependency ref="pkg:nuget/System.IO@4.1.0" />
@@ -8355,15 +8381,15 @@ When using NuGet 3.x this package requires at least version 3.4.</description>
     </dependency>
     <dependency ref="pkg:nuget/System.Text.Encodings.Web@4.5.0" />
     <dependency ref="pkg:nuget/System.Text.RegularExpressions@4.1.0">
-      <dependency ref="pkg:nuget/System.Runtime@4.1.0" />
-    </dependency>
-    <dependency ref="pkg:nuget/System.Text.RegularExpressions@4.1.0">
       <dependency ref="pkg:nuget/System.Collections@4.0.11" />
       <dependency ref="pkg:nuget/System.Globalization@4.0.11" />
       <dependency ref="pkg:nuget/System.Resources.ResourceManager@4.0.1" />
       <dependency ref="pkg:nuget/System.Runtime@4.1.0" />
       <dependency ref="pkg:nuget/System.Runtime.Extensions@4.1.0" />
       <dependency ref="pkg:nuget/System.Threading@4.0.11" />
+    </dependency>
+    <dependency ref="pkg:nuget/System.Text.RegularExpressions@4.1.0">
+      <dependency ref="pkg:nuget/System.Runtime@4.1.0" />
     </dependency>
     <dependency ref="pkg:nuget/System.Threading.Tasks.Extensions@4.5.4" />
     <dependency ref="pkg:nuget/System.Threading.Tasks.Extensions@4.5.4">

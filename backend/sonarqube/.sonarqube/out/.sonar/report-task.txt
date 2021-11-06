@@ -1,0 +1,6 @@
+projectKey=GenericImporter
+serverUrl=http://localhost:8082
+serverVersion=9.1.0.47736
+dashboardUrl=http://localhost:8082/dashboard?id=GenericImporter
+ceTaskId=AXz2e2r7no8QIgc5fZNe
+ceTaskUrl=http://localhost:8082/api/ce/task?id=AXz2e2r7no8QIgc5fZNe

@@ -1,0 +1,10 @@
+ë
+áC:\Users\Gabriel\Desktop\Repos\dotnet-generic-importer\backend\src\GenericImporter.Application\AutoMapper\DtoToCommandMappingProfile.csutf-8ê
+ÜC:\Users\Gabriel\Desktop\Repos\dotnet-generic-importer\backend\src\GenericImporter.Application\AutoMapper\EntityToDtoMappingProfile.csutf-8ì
+âC:\Users\Gabriel\Desktop\Repos\dotnet-generic-importer\backend\src\GenericImporter.Application\DataTransferObjects\XptoDTOs\AddXptoDto.csutf-8ñ
+åC:\Users\Gabriel\Desktop\Repos\dotnet-generic-importer\backend\src\GenericImporter.Application\DataTransferObjects\XptoDTOs\UpdateXptoDto.csutf-8ê
+ÜC:\Users\Gabriel\Desktop\Repos\dotnet-generic-importer\backend\src\GenericImporter.Application\DataTransferObjects\XptoDTOs\XptoDto.csutf-8Ö
+|C:\Users\Gabriel\Desktop\Repos\dotnet-generic-importer\backend\src\GenericImporter.Application\Interfaces\IXptoAppService.csutf-8Ç
+yC:\Users\Gabriel\Desktop\Repos\dotnet-generic-importer\backend\src\GenericImporter.Application\Services\XptoAppService.csutf-8™
+ûC:\Users\Gabriel\Desktop\Repos\dotnet-generic-importer\backend\src\GenericImporter.Application\obj\Debug\net5.0\.NETCoreApp,Version=v5.0.AssemblyAttributes.csutf-8ß
+õC:\Users\Gabriel\Desktop\Repos\dotnet-generic-importer\backend\src\GenericImporter.Application\obj\Debug\net5.0\GenericImporter.Application.AssemblyInfo.csutf-8

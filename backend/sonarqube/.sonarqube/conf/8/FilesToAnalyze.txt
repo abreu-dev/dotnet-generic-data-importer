@@ -1,0 +1,7 @@
+﻿C:\Users\Gabriel\Desktop\Repos\dotnet-generic-importer\backend\src\GenericImporter.Application\AutoMapper\DtoToCommandMappingProfile.cs
+C:\Users\Gabriel\Desktop\Repos\dotnet-generic-importer\backend\src\GenericImporter.Application\AutoMapper\EntityToDtoMappingProfile.cs
+C:\Users\Gabriel\Desktop\Repos\dotnet-generic-importer\backend\src\GenericImporter.Application\DataTransferObjects\XptoDTOs\AddXptoDto.cs
+C:\Users\Gabriel\Desktop\Repos\dotnet-generic-importer\backend\src\GenericImporter.Application\DataTransferObjects\XptoDTOs\UpdateXptoDto.cs
+C:\Users\Gabriel\Desktop\Repos\dotnet-generic-importer\backend\src\GenericImporter.Application\DataTransferObjects\XptoDTOs\XptoDto.cs
+C:\Users\Gabriel\Desktop\Repos\dotnet-generic-importer\backend\src\GenericImporter.Application\Interfaces\IXptoAppService.cs
+C:\Users\Gabriel\Desktop\Repos\dotnet-generic-importer\backend\src\GenericImporter.Application\Services\XptoAppService.cs

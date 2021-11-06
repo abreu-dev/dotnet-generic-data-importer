@@ -1,0 +1,6 @@
+﻿C:\Users\Gabriel\Desktop\Repos\dotnet-generic-importer\backend\src\GenericImporter.Infra.Data\Contexts\DataContext.cs
+C:\Users\Gabriel\Desktop\Repos\dotnet-generic-importer\backend\src\GenericImporter.Infra.Data\Mappings\XptoMapping.cs
+C:\Users\Gabriel\Desktop\Repos\dotnet-generic-importer\backend\src\GenericImporter.Infra.Data\Migrations\20211105020653_Initial.cs
+C:\Users\Gabriel\Desktop\Repos\dotnet-generic-importer\backend\src\GenericImporter.Infra.Data\Migrations\20211105020653_Initial.Designer.cs
+C:\Users\Gabriel\Desktop\Repos\dotnet-generic-importer\backend\src\GenericImporter.Infra.Data\Migrations\DataContextModelSnapshot.cs
+C:\Users\Gabriel\Desktop\Repos\dotnet-generic-importer\backend\src\GenericImporter.Infra.Data\Repositories\XptoRepository.cs
