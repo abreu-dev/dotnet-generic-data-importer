@@ -3,7 +3,7 @@ using System;
 
 namespace GenericImporter.Application.DataTransferObjects.XptoDTOs
 {
-    public class XptoDTO : IDataTransferObject
+    public class XptoDTO : DataTransferObject
     {
         public Guid Id { get; set; }
         public int Code { get; set; }

@@ -1,11 +1,8 @@
 ﻿using AutoMapper;
 using GenericImporter.Application.Core.DataTransferObjects;
 using GenericImporter.Application.Core.Interfaces;
-using GenericImporter.Domain.Core.Commands;
 using GenericImporter.Domain.Core.Entities;
 using GenericImporter.Domain.Core.Interfaces;
-using GenericImporter.Domain.Core.Mediator;
-using GenericImporter.Domain.Core.Notifications;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -13,8 +10,8 @@ using System.Threading.Tasks;
 namespace GenericImporter.Application.Core.Services
 {
     public abstract class AppService<TDTO, TAddDTO, TEntity> : IAppService<TDTO, TAddDTO>
-        where TDTO : IDataTransferObject
-        where TAddDTO : IDataTransferObject
+        where TDTO : DataTransferObject
+        where TAddDTO : DataTransferObject
         where TEntity : Entity
     {
         private readonly IMapper _mapper;

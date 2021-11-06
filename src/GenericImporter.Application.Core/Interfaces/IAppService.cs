@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 namespace GenericImporter.Application.Core.Interfaces
 {
     public interface IAppService<TDTO, TAddDTO>
-        where TDTO : IDataTransferObject
-        where TAddDTO : IDataTransferObject
+        where TDTO : DataTransferObject
+        where TAddDTO : DataTransferObject
     {
         Task<IEnumerable<TDTO>> GetAll();
         Task<TDTO> GetById(Guid id);

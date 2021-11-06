@@ -2,7 +2,7 @@
 
 namespace GenericImporter.Application.DataTransferObjects.XptoDTOs
 {
-    public class AddXptoDTO : IDataTransferObject
+    public class AddXptoDTO : DataTransferObject
     {
         public string Name { get; set; }
     }
