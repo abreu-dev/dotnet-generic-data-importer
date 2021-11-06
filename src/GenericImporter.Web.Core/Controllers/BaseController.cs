@@ -1,4 +1,5 @@
 ﻿using GenericImporter.Domain.Core.Notifications;
+using GenericImporter.Web.Core.Common;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
@@ -35,9 +36,9 @@ namespace GenericImporter.Web.Core.Controllers
             }
             else
             {
-                return UnprocessableEntity(new
+                return UnprocessableEntity(new UnprocessableEntityResponse()
                 {
-                    errors = GetValidationErrors()
+                    Errors = GetValidationErrors()
                 });
             }
         }
