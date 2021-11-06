@@ -28,9 +28,9 @@ namespace GenericImporter.Application.Tests.Services
                 new Mock<IXptoRepository>().Object);
         }
 
-        [Fact]
+        [Fact(DisplayName = "Add_ShouldPublishAddXptoCommand")]
         [Trait("AppService", "Xpto")]
-        public async Task Add_ShouldPublishAddXptoCommand_Ever()
+        public async Task Add_ShouldPublishAddXptoCommand()
         {
             // Arrange
             var addXptoDTO = new AddXptoDTO()

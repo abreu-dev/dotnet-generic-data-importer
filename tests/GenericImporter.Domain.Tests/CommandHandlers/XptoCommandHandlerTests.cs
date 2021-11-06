@@ -34,7 +34,7 @@ namespace GenericImporter.Domain.Tests.CommandHandlers
                 _mockXptoRepository.Object);
         }
 
-        [Fact]
+        [Fact(DisplayName = "Handle_AddXptoCommand_ShouldPublishDomainNotification_WhenInvalidCommand")]
         [Trait("CommandHandler", "Xpto")]
         public async Task Handle_AddXptoCommand_ShouldPublishDomainNotification_WhenInvalidCommand()
         {
@@ -51,12 +51,11 @@ namespace GenericImporter.Domain.Tests.CommandHandlers
             await _xptoCommandHandler.Handle(command, CancellationToken.None);
 
             // Assert
-            _mockMediatorHandler
-                .Verify(e => e.PublishDomainNotification(It.Is<DomainNotification>(s => s.Key == command.MessageType
-                    && s.Value == DomainMessages.RequiredField.Format("Name").Message)), Times.Once);
+            _mockMediatorHandler.Verify(e => e.PublishDomainNotification(It.Is<DomainNotification>(s => 
+                s.Key == command.MessageType && s.Value == DomainMessages.RequiredField.Format("Name").Message)), Times.Once);
         }
 
-        [Fact]
+        [Fact(DisplayName = "Handle_AddXptoCommand_ShouldPublishDomainNotification_WhenNameAlreadyInUse")]
         [Trait("CommandHandler", "Xpto")]
         public async Task Handle_AddXptoCommand_ShouldPublishDomainNotification_WhenNameAlreadyInUse()
         {
@@ -80,7 +79,7 @@ namespace GenericImporter.Domain.Tests.CommandHandlers
                 s.Key == command.MessageType && s.Value == DomainMessages.AlreadyInUse.Format("Name").Message)), Times.Once);
         }
 
-        [Fact]
+        [Fact(DisplayName = "Handle_AddXptoCommand_ShouldAddAndCommit_WhenValid")]
         [Trait("CommandHandler", "Xpto")]
         public async Task Handle_AddXptoCommand_ShouldAddAndCommit_WhenValid()
         {

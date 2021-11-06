@@ -8,7 +8,7 @@ namespace GenericImporter.Domain.Tests.Commands
 {
     public class XptoCommandTests
     {
-        [Fact]
+        [Fact(DisplayName = "AddXptoCommand_ShouldFailValidation_WhenEmptyName")]
         [Trait("Command", "Xpto")]
         public void AddXptoCommand_ShouldFailValidation_WhenEmptyName()
         {
@@ -29,7 +29,7 @@ namespace GenericImporter.Domain.Tests.Commands
                 command.ValidationResult.Errors.Single().ErrorMessage);
         }
 
-        [Fact]
+        [Fact(DisplayName = "AddXptoCommand_ShouldBeValid_WhenBeWithinValidationRules")]
         [Trait("Command", "Xpto")]
         public void AddXptoCommand_ShouldBeValid_WhenBeWithinValidationRules()
         {
