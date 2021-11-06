@@ -7,7 +7,7 @@ namespace GenericImporter.Domain.Core.Commands
 {
     public abstract class Command : Message, IRequest<Unit>
     {
-        public ValidationResult ValidationResult { get; protected set; }
+        public virtual ValidationResult ValidationResult { get; protected set; }
 
         protected Command(Guid aggregateId) : base(aggregateId) { }
 
