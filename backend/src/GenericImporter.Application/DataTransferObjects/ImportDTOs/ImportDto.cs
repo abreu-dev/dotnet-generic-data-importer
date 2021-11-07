@@ -11,6 +11,10 @@ namespace GenericImporter.Application.DataTransferObjects.ImportDTOs
         public int Code { get; set; }
         public ImportLayoutDto ImportLayout { get; set; }
         public DateTime Date { get; set; }
+        public bool Processed { get; set; }
+        public int ItemsUnprocessed { get; set; }
+        public int ItemsFailedProcessed { get; set; }
+        public int ItemsSuccessfullyProcessed { get; set; }
         public IEnumerable<ImportItemDto> ImportItems { get; set; }
     }
 }

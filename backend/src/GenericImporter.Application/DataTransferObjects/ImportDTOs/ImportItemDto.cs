@@ -7,5 +7,7 @@ namespace GenericImporter.Application.DataTransferObjects.ImportDTOs
     {
         public Guid Id { get; set; }
         public string ImportFileLine { get; set; }
+        public bool Processed { get; set; }
+        public string Error { get; set; }
     }
 }

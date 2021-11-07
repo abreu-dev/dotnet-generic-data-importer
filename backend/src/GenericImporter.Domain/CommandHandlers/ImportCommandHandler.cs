@@ -46,6 +46,7 @@ namespace GenericImporter.Domain.CommandHandlers
             }
 
             request.Entity.Date = DateTime.UtcNow;
+            request.Entity.ItemsUnprocessed = request.Entity.ImportItems.Count();
             _importRepository.Add(request.Entity);
 
             await Commit(_importRepository.UnitOfWork);
