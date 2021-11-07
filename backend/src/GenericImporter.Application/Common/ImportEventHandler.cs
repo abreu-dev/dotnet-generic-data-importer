@@ -1,9 +1,12 @@
-﻿using GenericImporter.Domain.Core.Common;
+﻿using GenericImporter.Application.DataTransferObjects.XptoDtos;
+using GenericImporter.Application.Interfaces;
+using GenericImporter.Domain.Core.Common;
 using GenericImporter.Domain.Core.Mediator;
 using GenericImporter.Domain.Core.Notifications;
 using GenericImporter.Domain.Events.ImportEvents;
 using GenericImporter.Domain.Interfaces;
 using MediatR;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Linq;
 using System.Threading;
@@ -16,33 +19,42 @@ namespace GenericImporter.Application.Common
     {
         private readonly IMediatorHandler _mediatorHandler;
         private readonly IImportRepository _importRepository;
+        private readonly IServiceProvider _serviceProvider;
+        private readonly DomainNotificationHandler _notifications;
 
-        public ImportEventHandler(IMediatorHandler mediatorHandler, 
-                                  IImportRepository importRepository)
+        public ImportEventHandler(IMediatorHandler mediatorHandler,
+                                  IImportRepository importRepository, 
+                                  IServiceProvider serviceProvider,
+                                  INotificationHandler<DomainNotification> notifications)
         {
             _mediatorHandler = mediatorHandler;
             _importRepository = importRepository;
+            _serviceProvider = serviceProvider;
+            _notifications = (DomainNotificationHandler)notifications;
         }
 
         public async Task Handle(ImportAddedEvent notification, CancellationToken cancellationToken)
         {
             var import = await _importRepository.GetById(notification.AggregateId);
 
+            var appService = _serviceProvider.GetRequiredService<IXptoAppService>();
+
             foreach (var item in import.ImportItems)
             {
-                if (item.ImportFileLine == "ImportedXPTO1")
+                var addDto = new AddXptoDto()
                 {
-                    item.Processed = true;
-                    item.Error = "Falhou.";
-                }
-                else if (item.ImportFileLine == "ImportedXPTO2")
+                    Name = item.ImportFileLine
+                };
+                await appService.Add(addDto);
+
+                if (_notifications.HasNotifications())
                 {
-                    item.Processed = true;
+                    item.Error = string.Join(", ", _notifications.GetNotifications().Select(c => c.Value));
                 }
-                else
-                {
-                    item.Processed = false;
-                }
+
+                item.Processed = true;
+
+                _notifications.ClearNotifications();
             }
 
             import.ItemsSuccessfullyProcessed = import.ImportItems.Count(x => x.Processed && string.IsNullOrEmpty(x.Error));

@@ -7,7 +7,7 @@ namespace GenericImporter.Domain.Core.Notifications
 {
     public class DomainNotificationHandler : INotificationHandler<DomainNotification>
     {
-        private readonly List<DomainNotification> _notifications;
+        private List<DomainNotification> _notifications;
 
         public DomainNotificationHandler()
         {
@@ -28,6 +28,11 @@ namespace GenericImporter.Domain.Core.Notifications
         public virtual bool HasNotifications()
         {
             return GetNotifications().Count > 0;
+        }
+
+        public virtual void ClearNotifications()
+        {
+            _notifications = new List<DomainNotification>();
         }
     }
 }
