@@ -5,6 +5,7 @@ using GenericImporter.Domain.Core.Mediator;
 using GenericImporter.Domain.Core.Notifications;
 using GenericImporter.Domain.Interfaces;
 using MediatR;
+using System;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -44,6 +45,7 @@ namespace GenericImporter.Domain.CommandHandlers
                 return Unit.Value;
             }
 
+            request.Entity.Date = DateTime.UtcNow;
             _importRepository.Add(request.Entity);
 
             await Commit(_importRepository.UnitOfWork);

@@ -85,7 +85,7 @@ namespace GenericImporter.Application.Tests.AutoMapper
             var import = new Import()
             {
                 ImportLayoutId = Guid.NewGuid(),
-                Date = DateTime.Now,
+                Date = DateTime.UtcNow,
                 ImportLayout = new ImportLayout()
                 {
                     Name = "Name",
