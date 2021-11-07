@@ -3,6 +3,7 @@ using GenericImporter.Domain.Core.CommandHandlers;
 using GenericImporter.Domain.Core.Common;
 using GenericImporter.Domain.Core.Mediator;
 using GenericImporter.Domain.Core.Notifications;
+using GenericImporter.Domain.Events.ImportEvents;
 using GenericImporter.Domain.Interfaces;
 using MediatR;
 using System;
@@ -49,7 +50,10 @@ namespace GenericImporter.Domain.CommandHandlers
             request.Entity.ItemsUnprocessed = request.Entity.ImportItems.Count();
             _importRepository.Add(request.Entity);
 
-            await Commit(_importRepository.UnitOfWork);
+            if (await Commit(_importRepository.UnitOfWork))
+            {
+                await _mediatorHandler.PublishEvent(new ImportAddedEvent(request.Entity.Id));
+            }
 
             return Unit.Value;
         }
