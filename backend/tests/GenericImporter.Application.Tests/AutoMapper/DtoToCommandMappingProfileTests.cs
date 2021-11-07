@@ -1,10 +1,13 @@
 ﻿using AutoMapper;
 using GenericImporter.Application.AutoMapper;
+using GenericImporter.Application.DataTransferObjects.ImportDTOs;
 using GenericImporter.Application.DataTransferObjects.ImportLayoutDTOs;
 using GenericImporter.Application.DataTransferObjects.XptoDtos;
+using GenericImporter.Domain.Commands.ImportCommands;
 using GenericImporter.Domain.Commands.ImportLayoutCommands;
 using GenericImporter.Domain.Commands.XptoCommands;
 using GenericImporter.Domain.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Xunit;
@@ -68,6 +71,24 @@ namespace GenericImporter.Application.Tests.AutoMapper
             Assert.Equal(addImportLayoutDto.ImportLayoutEntity, result.Entity.ImportLayoutEntity);
             Assert.Equal(addImportLayoutDto.ImportLayoutColumns.Single().Name, result.Entity.ImportLayoutColumns.Single().Name);
             Assert.Equal(addImportLayoutDto.ImportLayoutColumns.Single().Position, result.Entity.ImportLayoutColumns.Single().Position);
+        }
+
+        [Fact(DisplayName = "Map_ShouldMapAddImportDtoToAddImportCommand")]
+        [Trait("AutoMapper", "DtoToCommandMappingProfile")]
+        public void Map_ShouldMapAddImportDtoToAddImportCommand()
+        {
+            // Arrange
+            var addImportDto = new AddImportDto()
+            {
+                ImportLayoutId = Guid.NewGuid()
+            };
+
+            // Act
+            var result = _mapper.Map<AddImportCommand>(addImportDto);
+
+            // Assert
+            Assert.NotNull(result);
+            Assert.Equal(addImportDto.ImportLayoutId, result.Entity.ImportLayoutId);
         }
     }
 }

@@ -2,6 +2,7 @@
 using GenericImporter.Application.Interfaces;
 using GenericImporter.Application.Services;
 using GenericImporter.Domain.CommandHandlers;
+using GenericImporter.Domain.Commands.ImportCommands;
 using GenericImporter.Domain.Commands.ImportLayoutCommands;
 using GenericImporter.Domain.Commands.XptoCommands;
 using GenericImporter.Domain.Common;
@@ -32,6 +33,7 @@ namespace GenericImporter.Infra.CrossCutting.IoC
             // Domain - Commands
             services.AddScoped<IRequestHandler<AddXptoCommand, Unit>, XptoCommandHandler>();
             services.AddScoped<IRequestHandler<AddImportLayoutCommand, Unit>, ImportLayoutCommandHandler>();
+            services.AddScoped<IRequestHandler<AddImportCommand, Unit>, ImportCommandHandler>();
 
             // Infra Data - Contexts
             services.AddScoped<DataContext>();
@@ -39,10 +41,12 @@ namespace GenericImporter.Infra.CrossCutting.IoC
             // Infra Data - Repositories
             services.AddScoped<IXptoRepository, XptoRepository>();
             services.AddScoped<IImportLayoutRepository, ImportLayoutRepository>();
+            services.AddScoped<IImportRepository, ImportRepository>();
 
             // Application - AppServices
             services.AddScoped<IXptoAppService, XptoAppService>();
             services.AddScoped<IImportLayoutAppService, ImportLayoutAppService>();
+            services.AddScoped<IImportAppService, ImportAppService>();
 
         }
     }

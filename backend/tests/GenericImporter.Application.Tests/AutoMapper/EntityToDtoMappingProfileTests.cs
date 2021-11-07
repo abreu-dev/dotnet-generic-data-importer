@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using GenericImporter.Application.AutoMapper;
+using GenericImporter.Application.DataTransferObjects.ImportDTOs;
 using GenericImporter.Application.DataTransferObjects.ImportLayoutDTOs;
 using GenericImporter.Application.DataTransferObjects.XptoDtos;
 using GenericImporter.Domain.Entities;
@@ -74,6 +75,48 @@ namespace GenericImporter.Application.Tests.AutoMapper
             Assert.Equal(importLayout.ImportLayoutEntity, result.ImportLayoutEntity);
             Assert.Equal(importLayout.ImportLayoutColumns.Single().Name, result.ImportLayoutColumns.Single().Name);
             Assert.Equal(importLayout.ImportLayoutColumns.Single().Position, result.ImportLayoutColumns.Single().Position);
+        }
+
+        [Fact(DisplayName = "Map_ShouldMapImportToImportDto")]
+        [Trait("AutoMapper", "EntityToDtoMappingProfile")]
+        public void Map_ShouldMapImportToImportDto()
+        {
+            // Arrange
+            var import = new Import()
+            {
+                ImportLayoutId = Guid.NewGuid(),
+                Date = DateTime.Now,
+                ImportLayout = new ImportLayout()
+                {
+                    Name = "Name",
+                    Separator = ";",
+                    ImportLayoutEntity = ImportLayoutEntity.Xpto,
+                    ImportLayoutColumns = new List<ImportLayoutColumn>()
+                    {
+                        new ImportLayoutColumn()
+                        {
+                            Name = "Name",
+                            Position = 1
+                        }
+                    }
+                }
+            };
+
+            // Act
+            var result = _mapper.Map<ImportDto>(import);
+
+            // Assert
+            Assert.NotNull(result);
+            Assert.Equal(import.Id, result.Id);
+            Assert.Equal(import.Code, result.Code);
+            Assert.Equal(import.ImportLayout.Id, result.ImportLayout.Id);
+            Assert.Equal(import.ImportLayout.Code, result.ImportLayout.Code);
+            Assert.Equal(import.ImportLayout.Name, result.ImportLayout.Name);
+            Assert.Equal(import.ImportLayout.Separator, result.ImportLayout.Separator);
+            Assert.Equal(import.ImportLayout.ImportLayoutEntity, result.ImportLayout.ImportLayoutEntity);
+            Assert.Equal(import.ImportLayout.ImportLayoutColumns.Single().Name, result.ImportLayout.ImportLayoutColumns.Single().Name);
+            Assert.Equal(import.ImportLayout.ImportLayoutColumns.Single().Position, result.ImportLayout.ImportLayoutColumns.Single().Position);
+            Assert.Equal(import.Date, result.Date);
         }
     }
 }

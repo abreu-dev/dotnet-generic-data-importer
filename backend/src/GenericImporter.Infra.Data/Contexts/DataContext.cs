@@ -9,6 +9,7 @@ namespace GenericImporter.Infra.Data.Contexts
     {
         public DbSet<Xpto> Xpto { get; set; }
         public DbSet<ImportLayout> ImportLayout { get; set; }
+        public DbSet<Import> Import { get; set; }
 
         public DataContext(DbContextOptions<DataContext> options) : base(options) { }
 
@@ -16,6 +17,7 @@ namespace GenericImporter.Infra.Data.Contexts
         {
             modelBuilder.ApplyConfiguration(new XptoMapping());
             modelBuilder.ApplyConfiguration(new ImportLayoutMapping());
+            modelBuilder.ApplyConfiguration(new ImportMapping());
 
             base.OnModelCreating(modelBuilder);
         }

@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
+using GenericImporter.Application.DataTransferObjects.ImportDTOs;
 using GenericImporter.Application.DataTransferObjects.ImportLayoutDTOs;
 using GenericImporter.Application.DataTransferObjects.XptoDtos;
+using GenericImporter.Domain.Commands.ImportCommands;
 using GenericImporter.Domain.Commands.ImportLayoutCommands;
 using GenericImporter.Domain.Commands.XptoCommands;
 using GenericImporter.Domain.Entities;
@@ -14,6 +16,7 @@ namespace GenericImporter.Application.AutoMapper
         {
             CreateXptoMap();
             CreateImportLayoutMap();
+            CreateImportMap();
         }
 
         private void CreateXptoMap()
@@ -34,6 +37,13 @@ namespace GenericImporter.Application.AutoMapper
                     Name = s2.Name,
                     Position = s2.Position
                 })));
+        }
+
+        private void CreateImportMap()
+        {
+            CreateMap<AddImportDto, AddImportCommand>()
+                .ForMember(d => d.Entity, o => o.MapFrom(s => new Import()))
+                .ForPath(d => d.Entity.ImportLayoutId, o => o.MapFrom(s => s.ImportLayoutId));
         }
     }
 }

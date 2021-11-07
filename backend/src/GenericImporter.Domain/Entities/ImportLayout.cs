@@ -12,5 +12,6 @@ namespace GenericImporter.Domain.Entities
 
         // EF Rel.
         public IEnumerable<ImportLayoutColumn> ImportLayoutColumns { get; set; }
+        public IEnumerable<Import> Imports { get; set; }
     }
 }
