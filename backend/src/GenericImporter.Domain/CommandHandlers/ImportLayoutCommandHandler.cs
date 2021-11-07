@@ -1,4 +1,5 @@
 ﻿using GenericImporter.Domain.Commands.ImportLayoutCommands;
+using GenericImporter.Domain.Common;
 using GenericImporter.Domain.Core.CommandHandlers;
 using GenericImporter.Domain.Core.Common;
 using GenericImporter.Domain.Core.Mediator;
@@ -123,8 +124,23 @@ namespace GenericImporter.Domain.CommandHandlers
 
             foreach (var column in importLayoutColumns)
             {
-                var property = entityType.GetProperty(column.Name);
-                if (property == null)
+                var columnWasFound = false;
+
+                foreach (var property in entityType.GetProperties())
+                {
+                    var customAttribute = property.GetCustomAttributes(typeof(ImportFieldAttribute), false).SingleOrDefault();
+                    if (customAttribute != null)
+                    {
+                        var fieldAttribute = (ImportFieldAttribute)customAttribute;
+                        if (fieldAttribute.Name == column.Name)
+                        {
+                            columnWasFound = true;
+                            break;
+                        }
+                    }
+                }
+
+                if (!columnWasFound)
                 {
                     await _mediatorHandler.PublishDomainNotification(new DomainNotification(messageType,
                         $"Column name '{column.Name}' not found in entity '{importLayoutEntity}'."));
