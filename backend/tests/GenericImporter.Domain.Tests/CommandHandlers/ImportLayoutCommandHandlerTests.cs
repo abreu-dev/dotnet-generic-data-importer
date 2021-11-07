@@ -1,5 +1,6 @@
 ﻿using GenericImporter.Domain.CommandHandlers;
 using GenericImporter.Domain.Commands.ImportLayoutCommands;
+using GenericImporter.Domain.Common;
 using GenericImporter.Domain.Core.Common;
 using GenericImporter.Domain.Core.Interfaces;
 using GenericImporter.Domain.Core.Mediator;
@@ -11,6 +12,7 @@ using Moq;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
+using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 using Xunit;
@@ -21,6 +23,7 @@ namespace GenericImporter.Domain.Tests.CommandHandlers
     {
         private readonly Mock<IMediatorHandler> _mockMediatorHandler;
         private readonly Mock<IImportLayoutRepository> _mockImportLayoutRepository;
+        private readonly Mock<IImportFieldRetriever> _mockImportFieldRetriever;
         private readonly Mock<IUnitOfWork> _mockUnitOfWork;
         private readonly ImportLayoutCommandHandler _importLayoutCommandHandler;
 
@@ -28,11 +31,13 @@ namespace GenericImporter.Domain.Tests.CommandHandlers
         {
             _mockMediatorHandler = new Mock<IMediatorHandler>();
             _mockImportLayoutRepository = new Mock<IImportLayoutRepository>();
+            _mockImportFieldRetriever = new Mock<IImportFieldRetriever>();
             _mockUnitOfWork = new Mock<IUnitOfWork>();
             _importLayoutCommandHandler = new ImportLayoutCommandHandler(
                 _mockMediatorHandler.Object,
                 new Mock<DomainNotificationHandler>().Object,
-                _mockImportLayoutRepository.Object);
+                _mockImportLayoutRepository.Object,
+                _mockImportFieldRetriever.Object);
         }
 
         [Fact(DisplayName = "Handle_AddImportLayoutCommand_ShouldPublishDomainNotification_WhenInvalidCommand")]
@@ -226,8 +231,17 @@ namespace GenericImporter.Domain.Tests.CommandHandlers
                     }
                 }
             };
+            _mockImportLayoutRepository.Setup(e => e.Search(It.IsAny<Expression<Func<ImportLayout, bool>>>()))
+                .ReturnsAsync(new List<ImportLayout>());
 
-            _mockImportLayoutRepository.Setup(e => e.Search(It.IsAny<Expression<Func<ImportLayout, bool>>>())).ReturnsAsync(new List<ImportLayout>());
+            var propertyInfos = new List<PropertyInfo>();
+            var namePropertyInfo = new Mock<PropertyInfo>();
+            var nameAttribute = new ImportFieldAttribute() { Name = "Name" };
+            namePropertyInfo.Setup(e => e.GetCustomAttributes(typeof(ImportFieldAttribute), false))
+                .Returns(new List<object>() { nameAttribute }.ToArray());
+            propertyInfos.Add(namePropertyInfo.Object);
+            _mockImportFieldRetriever.Setup(e => e.GetProperties(command.Entity.ImportLayoutEntity))
+                .Returns(propertyInfos.ToArray());
 
             // Act
             await _importLayoutCommandHandler.Handle(command, CancellationToken.None);
@@ -261,6 +275,16 @@ namespace GenericImporter.Domain.Tests.CommandHandlers
             };
 
             _mockImportLayoutRepository.Setup(e => e.Search(It.IsAny<Expression<Func<ImportLayout, bool>>>())).ReturnsAsync(new List<ImportLayout>());
+
+            var propertyInfos = new List<PropertyInfo>();
+            var namePropertyInfo = new Mock<PropertyInfo>();
+            var nameAttribute = new ImportFieldAttribute() { Name = "Name" };
+            namePropertyInfo.Setup(e => e.GetCustomAttributes(typeof(ImportFieldAttribute), false))
+                .Returns(new List<object>() { nameAttribute }.ToArray());
+            propertyInfos.Add(namePropertyInfo.Object);
+            _mockImportFieldRetriever.Setup(e => e.GetProperties(command.Entity.ImportLayoutEntity))
+                .Returns(propertyInfos.ToArray());
+
             _mockUnitOfWork.Setup(e => e.Commit()).ReturnsAsync(true);
             _mockImportLayoutRepository.SetupGet(e => e.UnitOfWork).Returns(_mockUnitOfWork.Object);
 
