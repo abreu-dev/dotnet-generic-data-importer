@@ -14,7 +14,8 @@ namespace GenericImporter.Infra.Data.Repositories
         protected override IQueryable<Import> ImproveQuery(IQueryable<Import> query)
         {
             return query.Include(i => i.ImportLayout)
-                .ThenInclude(i => i.ImportLayoutColumns);
+                .ThenInclude(i => i.ImportLayoutColumns)
+                .Include(i => i.ImportItems);
         }
     }
 }

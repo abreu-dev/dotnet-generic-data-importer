@@ -46,7 +46,14 @@ namespace GenericImporter.Domain.Tests.CommandHandlers
             {
                 Entity = new Import()
                 {
-                    ImportLayoutId = Guid.Empty
+                    ImportLayoutId = Guid.Empty,
+                    ImportItems = new List<ImportItem>()
+                    {
+                        new ImportItem()
+                        {
+                            ImportFileLine = "ImportFileLine"
+                        }
+                    }
                 }
             };
 
@@ -68,7 +75,14 @@ namespace GenericImporter.Domain.Tests.CommandHandlers
             {
                 Entity = new Import()
                 {
-                    ImportLayoutId = Guid.NewGuid()
+                    ImportLayoutId = Guid.NewGuid(),
+                    ImportItems = new List<ImportItem>()
+                    {
+                        new ImportItem()
+                        {
+                            ImportFileLine = "ImportFileLine"
+                        }
+                    }
                 }
             };
 
@@ -93,7 +107,14 @@ namespace GenericImporter.Domain.Tests.CommandHandlers
             {
                 Entity = new Import()
                 {
-                    ImportLayoutId = Guid.NewGuid()
+                    ImportLayoutId = Guid.NewGuid(),
+                    ImportItems = new List<ImportItem>()
+                    {
+                        new ImportItem()
+                        {
+                            ImportFileLine = "ImportFileLine"
+                        }
+                    }
                 }
             };
 

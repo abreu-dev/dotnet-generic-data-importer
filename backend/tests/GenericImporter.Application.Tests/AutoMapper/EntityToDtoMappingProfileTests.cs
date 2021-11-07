@@ -86,6 +86,13 @@ namespace GenericImporter.Application.Tests.AutoMapper
             {
                 ImportLayoutId = Guid.NewGuid(),
                 Date = DateTime.UtcNow,
+                ImportItems = new List<ImportItem>()
+                {
+                    new ImportItem()
+                    {
+                        ImportFileLine = "ImportFileLine"
+                    }
+                },
                 ImportLayout = new ImportLayout()
                 {
                     Name = "Name",
@@ -114,9 +121,11 @@ namespace GenericImporter.Application.Tests.AutoMapper
             Assert.Equal(import.ImportLayout.Name, result.ImportLayout.Name);
             Assert.Equal(import.ImportLayout.Separator, result.ImportLayout.Separator);
             Assert.Equal(import.ImportLayout.ImportLayoutEntity, result.ImportLayout.ImportLayoutEntity);
+            Assert.Equal(import.Date, result.Date);
+            Assert.Equal(import.ImportItems.Single().Id, result.ImportItems.Single().Id);
+            Assert.Equal(import.ImportItems.Single().ImportFileLine, result.ImportItems.Single().ImportFileLine);
             Assert.Equal(import.ImportLayout.ImportLayoutColumns.Single().Name, result.ImportLayout.ImportLayoutColumns.Single().Name);
             Assert.Equal(import.ImportLayout.ImportLayoutColumns.Single().Position, result.ImportLayout.ImportLayoutColumns.Single().Position);
-            Assert.Equal(import.Date, result.Date);
         }
     }
 }

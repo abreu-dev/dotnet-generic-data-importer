@@ -12,6 +12,10 @@ namespace GenericImporter.Domain.Validators.ImportValidators
             RuleFor(x => x.Entity.ImportLayoutId)
                 .NotEmpty()
                 .WithMessage(DomainMessages.RequiredField.Format("ImportLayoutId").Message);
+
+            RuleFor(x => x.Entity.ImportItems)
+                .NotEmpty()
+                .WithMessage(DomainMessages.RequiredField.Format("ImportItems").Message);
         }
     }
 }

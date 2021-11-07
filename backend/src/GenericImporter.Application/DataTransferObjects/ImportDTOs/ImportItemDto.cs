@@ -3,9 +3,9 @@ using System;
 
 namespace GenericImporter.Application.DataTransferObjects.ImportDTOs
 {
-    public class AddImportDto : DataTransferObject
+    public class ImportItemDto : DataTransferObject
     {
-        public Guid ImportLayoutId { get; set; }
-        public string ImportFileLines { get; set; }
+        public Guid Id { get; set; }
+        public string ImportFileLine { get; set; }
     }
 }

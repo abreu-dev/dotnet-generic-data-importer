@@ -6,6 +6,8 @@ using GenericImporter.Domain.Commands.ImportCommands;
 using GenericImporter.Domain.Commands.ImportLayoutCommands;
 using GenericImporter.Domain.Commands.XptoCommands;
 using GenericImporter.Domain.Entities;
+using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 
 namespace GenericImporter.Application.AutoMapper
@@ -43,7 +45,27 @@ namespace GenericImporter.Application.AutoMapper
         {
             CreateMap<AddImportDto, AddImportCommand>()
                 .ForMember(d => d.Entity, o => o.MapFrom(s => new Import()))
+                .ForPath(d => d.Entity.ImportItems, o => o.MapFrom(s => MapImportFileLinesToImportItemList(s.ImportFileLines)))
                 .ForPath(d => d.Entity.ImportLayoutId, o => o.MapFrom(s => s.ImportLayoutId));
+        }
+
+        private IEnumerable<ImportItem> MapImportFileLinesToImportItemList(string importFileLines)
+        {
+            var importItems = new List<ImportItem>();
+
+            using (var reader = new StringReader(importFileLines))
+            {
+                string importFileLine;
+                while ((importFileLine = reader.ReadLine()) != null)
+                {
+                    if (!string.IsNullOrEmpty(importFileLine))
+                    {
+                        importItems.Add(new ImportItem() { ImportFileLine = importFileLine });
+                    }
+                }
+            }
+
+            return importItems;
         }
     }
 }

@@ -10,6 +10,7 @@ using GenericImporter.Domain.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using Xunit;
 
 namespace GenericImporter.Application.Tests.AutoMapper
@@ -78,9 +79,13 @@ namespace GenericImporter.Application.Tests.AutoMapper
         public void Map_ShouldMapAddImportDtoToAddImportCommand()
         {
             // Arrange
+            var importFileLine = "ImportFileLine";
             var addImportDto = new AddImportDto()
             {
-                ImportLayoutId = Guid.NewGuid()
+                ImportLayoutId = Guid.NewGuid(),
+                ImportFileLines = new StringBuilder()
+                    .AppendLine(importFileLine)
+                    .ToString()
             };
 
             // Act
@@ -89,6 +94,7 @@ namespace GenericImporter.Application.Tests.AutoMapper
             // Assert
             Assert.NotNull(result);
             Assert.Equal(addImportDto.ImportLayoutId, result.Entity.ImportLayoutId);
+            Assert.Equal(importFileLine, result.Entity.ImportItems.Single().ImportFileLine);
         }
     }
 }

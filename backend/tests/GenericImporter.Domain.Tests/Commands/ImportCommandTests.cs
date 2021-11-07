@@ -2,6 +2,7 @@
 using GenericImporter.Domain.Core.Common;
 using GenericImporter.Domain.Entities;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using Xunit;
 
@@ -18,7 +19,14 @@ namespace GenericImporter.Domain.Tests.Commands
             {
                 Entity = new Import()
                 {
-                    ImportLayoutId = Guid.Empty
+                    ImportLayoutId = Guid.Empty,
+                    ImportItems = new List<ImportItem>()
+                    {
+                        new ImportItem()
+                        {
+                            ImportFileLine = "ImportFileLine"
+                        }
+                    }
                 }
             };
 
@@ -27,6 +35,28 @@ namespace GenericImporter.Domain.Tests.Commands
 
             // Assert
             Assert.Equal(DomainMessages.RequiredField.Format("ImportLayoutId").Message,
+                command.ValidationResult.Errors.Single().ErrorMessage);
+        }
+
+        [Fact(DisplayName = "AddImportCommand_ShouldFailValidation_WhenEmptyImportItems")]
+        [Trait("Command", "Import")]
+        public void AddImportCommand_ShouldFailValidation_WhenEmptyImportItems()
+        {
+            // Arrange
+            var command = new AddImportCommand()
+            {
+                Entity = new Import()
+                {
+                    ImportLayoutId = Guid.NewGuid(),
+                    ImportItems = new List<ImportItem>()
+                }
+            };
+
+            // Act
+            command.IsValid();
+
+            // Assert
+            Assert.Equal(DomainMessages.RequiredField.Format("ImportItems").Message,
                 command.ValidationResult.Errors.Single().ErrorMessage);
         }
 
@@ -39,7 +69,14 @@ namespace GenericImporter.Domain.Tests.Commands
             {
                 Entity = new Import()
                 {
-                    ImportLayoutId = Guid.NewGuid()
+                    ImportLayoutId = Guid.NewGuid(),
+                    ImportItems = new List<ImportItem>()
+                    {
+                        new ImportItem()
+                        {
+                            ImportFileLine = "ImportFileLine"
+                        }
+                    }
                 }
             };
 
