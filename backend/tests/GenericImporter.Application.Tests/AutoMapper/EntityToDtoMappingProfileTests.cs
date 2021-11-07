@@ -86,11 +86,17 @@ namespace GenericImporter.Application.Tests.AutoMapper
             {
                 ImportLayoutId = Guid.NewGuid(),
                 Date = DateTime.UtcNow,
+                Processed = true,
+                ItemsFailedProcessed = 1,
+                ItemsSuccessfullyProcessed = 2,
+                ItemsUnprocessed = 3,
                 ImportItems = new List<ImportItem>()
                 {
                     new ImportItem()
                     {
-                        ImportFileLine = "ImportFileLine"
+                        ImportFileLine = "ImportFileLine",
+                        Processed = true,
+                        Error = "Error"
                     }
                 },
                 ImportLayout = new ImportLayout()
@@ -122,8 +128,14 @@ namespace GenericImporter.Application.Tests.AutoMapper
             Assert.Equal(import.ImportLayout.Separator, result.ImportLayout.Separator);
             Assert.Equal(import.ImportLayout.ImportLayoutEntity, result.ImportLayout.ImportLayoutEntity);
             Assert.Equal(import.Date, result.Date);
+            Assert.Equal(import.Processed, result.Processed);
+            Assert.Equal(import.ItemsFailedProcessed, result.ItemsFailedProcessed);
+            Assert.Equal(import.ItemsSuccessfullyProcessed, result.ItemsSuccessfullyProcessed);
+            Assert.Equal(import.ItemsUnprocessed, result.ItemsUnprocessed);
             Assert.Equal(import.ImportItems.Single().Id, result.ImportItems.Single().Id);
             Assert.Equal(import.ImportItems.Single().ImportFileLine, result.ImportItems.Single().ImportFileLine);
+            Assert.Equal(import.ImportItems.Single().Processed, result.ImportItems.Single().Processed);
+            Assert.Equal(import.ImportItems.Single().Error, result.ImportItems.Single().Error);
             Assert.Equal(import.ImportLayout.ImportLayoutColumns.Single().Name, result.ImportLayout.ImportLayoutColumns.Single().Name);
             Assert.Equal(import.ImportLayout.ImportLayoutColumns.Single().Position, result.ImportLayout.ImportLayoutColumns.Single().Position);
         }
