@@ -23,9 +23,19 @@ namespace GenericImporter.Infra.Data.Core.Repositories
 
         public IUnitOfWork UnitOfWork => _baseDbContext;
 
-        public virtual IQueryable<TEntity> Query()
+        private IQueryable<TEntity> BaseQuery()
         {
             return _dbSet;
+        }
+
+        protected virtual IQueryable<TEntity> ImproveQuery(IQueryable<TEntity> query)
+        {
+            return query;
+        }
+
+        public IQueryable<TEntity> Query()
+        {
+            return ImproveQuery(BaseQuery());
         }
 
         public virtual async Task<IEnumerable<TEntity>> Search(Expression<Func<TEntity, bool>> predicate)

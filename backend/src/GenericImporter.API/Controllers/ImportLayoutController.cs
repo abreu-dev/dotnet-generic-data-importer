@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace GenericImporter.API.Controllers
 {
+    [Route("api/import-layout")]
     public class ImportLayoutController : BaseController
     {
         private readonly IImportLayoutAppService _importLayoutAppService;

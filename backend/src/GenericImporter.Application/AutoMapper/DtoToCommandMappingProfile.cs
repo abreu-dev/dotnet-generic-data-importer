@@ -4,6 +4,7 @@ using GenericImporter.Application.DataTransferObjects.XptoDtos;
 using GenericImporter.Domain.Commands.ImportLayoutCommands;
 using GenericImporter.Domain.Commands.XptoCommands;
 using GenericImporter.Domain.Entities;
+using System.Linq;
 
 namespace GenericImporter.Application.AutoMapper
 {
@@ -24,7 +25,15 @@ namespace GenericImporter.Application.AutoMapper
         private void CreateImportLayoutMap()
         {
             CreateMap<AddImportLayoutDto, AddImportLayoutCommand>()
-                .ForMember(d => d.Entity, o => o.MapFrom(s => new ImportLayout() { Name = s.Name }));
+                .ForMember(d => d.Entity, o => o.MapFrom(s => new ImportLayout()))
+                .ForPath(d => d.Entity.Name, o => o.MapFrom(s => s.Name))
+                .ForPath(d => d.Entity.Separator, o => o.MapFrom(s => s.Separator))
+                .ForPath(d => d.Entity.ImportLayoutEntity, o => o.MapFrom(s => s.ImportLayoutEntity))
+                .ForPath(d => d.Entity.ImportLayoutColumns, o => o.MapFrom(s => s.ImportLayoutColumns.Select(s2 => new ImportLayoutColumn 
+                {
+                    Name = s2.Name,
+                    Position = s2.Position
+                })));
         }
     }
 }

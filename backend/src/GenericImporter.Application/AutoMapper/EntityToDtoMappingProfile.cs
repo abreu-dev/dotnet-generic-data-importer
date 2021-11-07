@@ -11,6 +11,7 @@ namespace GenericImporter.Application.AutoMapper
         {
             CreateMap<Xpto, XptoDto>();
             CreateMap<ImportLayout, ImportLayoutDto>();
+            CreateMap<ImportLayoutColumn, ImportLayoutColumnDto>();
         }
     }
 }
