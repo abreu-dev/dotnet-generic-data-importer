@@ -90,6 +90,153 @@ namespace GenericImporter.Domain.Tests.CommandHandlers
                 s.Key == command.MessageType && s.Value == DomainMessages.AlreadyInUse.Format("Name").Message)), Times.Once);
         }
 
+        [Fact(DisplayName = "Handle_AddImportLayoutCommand_ShouldPublishDomainNotification_WhenDontHaveColumnInPositionOne")]
+        [Trait("CommandHandler", "ImportLayout")]
+        public async Task Handle_AddImportLayoutCommand_ShouldPublishDomainNotification_WhenDontHaveColumnInPositionOne()
+        {
+            // Arrange
+            var command = new AddImportLayoutCommand()
+            {
+                Entity = new ImportLayout()
+                {
+                    Name = "Name",
+                    Separator = ";",
+                    ImportLayoutEntity = ImportLayoutEntity.Xpto,
+                    ImportLayoutColumns = new List<ImportLayoutColumn>()
+                    {
+                        new ImportLayoutColumn()
+                        {
+                            Name = "Name",
+                            Position = 2
+                        }
+                    }
+                }
+            };
+
+            _mockImportLayoutRepository.Setup(e => e.Search(It.IsAny<Expression<Func<ImportLayout, bool>>>())).ReturnsAsync(new List<ImportLayout>());
+
+            // Act
+            await _importLayoutCommandHandler.Handle(command, CancellationToken.None);
+
+            // Assert
+            _mockMediatorHandler.Verify(e => e.PublishDomainNotification(It.Is<DomainNotification>(s =>
+                s.Key == command.MessageType && s.Value == "There must be a column in position one.")), Times.Once);
+        }
+
+        [Fact(DisplayName = "Handle_AddImportLayoutCommand_ShouldPublishDomainNotification_WhenDontHaveColumnInPositionOne")]
+        [Trait("CommandHandler", "ImportLayout")]
+        public async Task Handle_AddImportLayoutCommand_ShouldPublishDomainNotification_WhenColumnsAreNotInConsecutiveOrder()
+        {
+            // Arrange
+            var command = new AddImportLayoutCommand()
+            {
+                Entity = new ImportLayout()
+                {
+                    Name = "Name",
+                    Separator = ";",
+                    ImportLayoutEntity = ImportLayoutEntity.Xpto,
+                    ImportLayoutColumns = new List<ImportLayoutColumn>()
+                    {
+                        new ImportLayoutColumn()
+                        {
+                            Name = "Name",
+                            Position = 1
+                        },
+                        new ImportLayoutColumn()
+                        {
+                            Name = "Name",
+                            Position = 3
+                        }
+                    }
+                }
+            };
+
+            _mockImportLayoutRepository.Setup(e => e.Search(It.IsAny<Expression<Func<ImportLayout, bool>>>())).ReturnsAsync(new List<ImportLayout>());
+
+            // Act
+            await _importLayoutCommandHandler.Handle(command, CancellationToken.None);
+
+            // Assert
+            _mockMediatorHandler.Verify(e => e.PublishDomainNotification(It.Is<DomainNotification>(s =>
+                s.Key == command.MessageType && s.Value == "Columns are not in consecutive order.")), Times.Once);
+        }
+
+        [Fact(DisplayName = "Handle_AddImportLayoutCommand_ShouldPublishDomainNotification_WhenDontHaveColumnInPositionOne")]
+        [Trait("CommandHandler", "ImportLayout")]
+        public async Task Handle_AddImportLayoutCommand_ShouldPublishDomainNotification_WhenColumnNameRepeat()
+        {
+            // Arrange
+            var command = new AddImportLayoutCommand()
+            {
+                Entity = new ImportLayout()
+                {
+                    Name = "Name",
+                    Separator = ";",
+                    ImportLayoutEntity = ImportLayoutEntity.Xpto,
+                    ImportLayoutColumns = new List<ImportLayoutColumn>()
+                    {
+                        new ImportLayoutColumn()
+                        {
+                            Name = "Name",
+                            Position = 1
+                        },
+                        new ImportLayoutColumn()
+                        {
+                            Name = "Name",
+                            Position = 2
+                        }
+                    }
+                }
+            };
+
+            _mockImportLayoutRepository.Setup(e => e.Search(It.IsAny<Expression<Func<ImportLayout, bool>>>())).ReturnsAsync(new List<ImportLayout>());
+
+            // Act
+            await _importLayoutCommandHandler.Handle(command, CancellationToken.None);
+
+            // Assert
+            _mockMediatorHandler.Verify(e => e.PublishDomainNotification(It.Is<DomainNotification>(s =>
+                s.Key == command.MessageType && s.Value == "There are repeated columns.")), Times.Once);
+        }
+
+        [Fact(DisplayName = "Handle_AddImportLayoutCommand_ShouldPublishDomainNotification_WhenDontHaveColumnInPositionOne")]
+        [Trait("CommandHandler", "ImportLayout")]
+        public async Task Handle_AddImportLayoutCommand_ShouldPublishDomainNotification_WhenColumnNameDontExistInImportLayoutEntity()
+        {
+            // Arrange
+            var command = new AddImportLayoutCommand()
+            {
+                Entity = new ImportLayout()
+                {
+                    Name = "Name",
+                    Separator = ";",
+                    ImportLayoutEntity = ImportLayoutEntity.Xpto,
+                    ImportLayoutColumns = new List<ImportLayoutColumn>()
+                    {
+                        new ImportLayoutColumn()
+                        {
+                            Name = "Name",
+                            Position = 1
+                        },
+                        new ImportLayoutColumn()
+                        {
+                            Name = "Date",
+                            Position = 2
+                        }
+                    }
+                }
+            };
+
+            _mockImportLayoutRepository.Setup(e => e.Search(It.IsAny<Expression<Func<ImportLayout, bool>>>())).ReturnsAsync(new List<ImportLayout>());
+
+            // Act
+            await _importLayoutCommandHandler.Handle(command, CancellationToken.None);
+
+            // Assert
+            _mockMediatorHandler.Verify(e => e.PublishDomainNotification(It.Is<DomainNotification>(s =>
+                s.Key == command.MessageType && s.Value == "Column name 'Date' not found in entity 'Xpto'.")), Times.Once);
+        }
+
         [Fact(DisplayName = "Handle_AddImportLayoutCommand_ShouldAddAndCommit_WhenValid")]
         [Trait("CommandHandler", "ImportLayout")]
         public async Task Handle_AddImportLayoutCommand_ShouldAddAndCommit_WhenValid()
