@@ -2,7 +2,7 @@
 using System.ComponentModel;
 using System.Reflection;
 
-namespace GenericImporter.Domain.Common
+namespace GenericImporter.Domain.Core.Common
 {
     public static class EnumExtensionMethods
     {

@@ -1,4 +1,5 @@
 ﻿using GenericImporter.Domain.Common;
+using GenericImporter.Domain.Core.Common;
 using GenericImporter.Domain.Enums;
 using System;
 using System.Collections.Generic;
