@@ -8,7 +8,6 @@ using GenericImporter.Domain.Entities;
 using GenericImporter.Domain.Enums;
 using GenericImporter.Domain.Interfaces;
 using MediatR;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
@@ -21,14 +20,17 @@ namespace GenericImporter.Domain.CommandHandlers
     {
         private readonly IMediatorHandler _mediatorHandler;
         private readonly IImportLayoutRepository _importLayoutRepository;
+        private readonly IImportFieldRetriever _importFieldRetriever;
 
         public ImportLayoutCommandHandler(IMediatorHandler mediatorHandler,
                                           INotificationHandler<DomainNotification> notifications,
-                                          IImportLayoutRepository importLayoutRepository)
+                                          IImportLayoutRepository importLayoutRepository, 
+                                          IImportFieldRetriever importFieldRetriever)
             : base(mediatorHandler, notifications)
         {
             _mediatorHandler = mediatorHandler;
             _importLayoutRepository = importLayoutRepository;
+            _importFieldRetriever = importFieldRetriever;
         }
 
         public async Task<Unit> Handle(AddImportLayoutCommand request, CancellationToken cancellationToken)
@@ -120,13 +122,13 @@ namespace GenericImporter.Domain.CommandHandlers
                                                             ImportLayoutEntity importLayoutEntity,
                                                             IEnumerable<ImportLayoutColumn> importLayoutColumns)
         {
-            var entityType = Type.GetType($"GenericImporter.Domain.Entities.{importLayoutEntity}");
+            var properties = _importFieldRetriever.GetProperties(importLayoutEntity);
 
             foreach (var column in importLayoutColumns)
             {
                 var columnWasFound = false;
 
-                foreach (var property in entityType.GetProperties())
+                foreach (var property in properties)
                 {
                     var customAttribute = property.GetCustomAttributes(typeof(ImportFieldAttribute), false).SingleOrDefault();
                     if (customAttribute != null)

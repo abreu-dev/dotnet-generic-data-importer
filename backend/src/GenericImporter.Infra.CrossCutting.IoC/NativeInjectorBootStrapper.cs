@@ -1,8 +1,10 @@
-﻿using GenericImporter.Application.Interfaces;
+﻿using GenericImporter.Application.Common;
+using GenericImporter.Application.Interfaces;
 using GenericImporter.Application.Services;
 using GenericImporter.Domain.CommandHandlers;
 using GenericImporter.Domain.Commands.ImportLayoutCommands;
 using GenericImporter.Domain.Commands.XptoCommands;
+using GenericImporter.Domain.Common;
 using GenericImporter.Domain.Core.Mediator;
 using GenericImporter.Domain.Core.Notifications;
 using GenericImporter.Domain.Interfaces;
@@ -24,9 +26,11 @@ namespace GenericImporter.Infra.CrossCutting.IoC
             // Domain - Notifications
             services.AddScoped<INotificationHandler<DomainNotification>, DomainNotificationHandler>();
 
+            // Domain - ImportFieldRetriever
+            services.AddScoped<IImportFieldRetriever, ImportFieldRetriever>();
+
             // Domain - Commands
             services.AddScoped<IRequestHandler<AddXptoCommand, Unit>, XptoCommandHandler>();
-
             services.AddScoped<IRequestHandler<AddImportLayoutCommand, Unit>, ImportLayoutCommandHandler>();
 
             // Infra Data - Contexts
