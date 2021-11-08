@@ -1,5 +1,4 @@
-﻿using GenericImporter.Application.DataTransferObjects.XptoDtos;
-using GenericImporter.Application.Interfaces;
+﻿using GenericImporter.Domain.Common;
 using GenericImporter.Domain.Core.Common;
 using GenericImporter.Domain.Core.Mediator;
 using GenericImporter.Domain.Core.Notifications;
@@ -9,6 +8,7 @@ using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Linq;
+using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -32,20 +32,57 @@ namespace GenericImporter.Application.Common
             _serviceProvider = serviceProvider;
             _notifications = (DomainNotificationHandler)notifications;
         }
+        
+        private PropertyInfo FindPropertyInfoByImportFieldAttributeName(Type entityType, string importFieldAttributeName)
+        {
+            foreach (var property in entityType.GetProperties())
+            {
+                var customAttribute = property.GetCustomAttributes(typeof(ImportFieldAttribute), false).SingleOrDefault();
+                if (customAttribute != null)
+                {
+                    var fieldAttribute = (ImportFieldAttribute)customAttribute;
+                    if (fieldAttribute.Name == importFieldAttributeName)
+                    {
+                        return property;
+                    }
+                }
+            }
+
+            return null;
+        }
+
+        private async Task CallMethod(object service, object entity)
+        {
+            const BindingFlags flags = BindingFlags.Public | BindingFlags.FlattenHierarchy | BindingFlags.Instance;
+
+            var methodToExecute = service.GetType().GetMethods(flags).SingleOrDefault(x => x.Name == "Add");
+            var parameter = Convert.ChangeType(entity, entity.GetType());
+
+            var invoke = methodToExecute.Invoke(service, new object[] { parameter });
+            await (invoke as Task);
+        }
 
         public async Task Handle(ImportAddedEvent notification, CancellationToken cancellationToken)
         {
             var import = await _importRepository.GetById(notification.AggregateId);
 
-            var appService = _serviceProvider.GetRequiredService<IXptoAppService>();
+            var entityType = Type.GetType(import.ImportLayout.ImportLayoutEntity.GetDescription());
+            var customAttribute = entityType.GetCustomAttributes(typeof(ImportClassAttribute), false).SingleOrDefault();
+            var classAttribute = (ImportClassAttribute)customAttribute;
+            var appService = _serviceProvider.GetRequiredService(classAttribute.ServiceToUse);
 
             foreach (var item in import.ImportItems)
             {
-                var addDto = new AddXptoDto()
+                var splited = item.ImportFileLine.Split(import.ImportLayout.Separator);
+                var entity = Activator.CreateInstance(entityType);
+
+                foreach (var column in import.ImportLayout.ImportLayoutColumns)
                 {
-                    Name = item.ImportFileLine
-                };
-                await appService.Add(addDto);
+                    var property = FindPropertyInfoByImportFieldAttributeName(entityType, column.Name);
+                    property.SetValue(entity, splited[column.Position - 1]);
+                }
+
+                await CallMethod(appService, entity);
 
                 if (_notifications.HasNotifications())
                 {
