@@ -1,7 +1,7 @@
 ﻿using GenericImporter.API.Controllers;
 using GenericImporter.Application.DataTransferObjects.XptoDtos;
 using GenericImporter.Application.Interfaces;
-using GenericImporter.Domain.Core.Notifications;
+using Core.Domain.Notifications;
 using Moq;
 using System;
 using System.Collections.Generic;

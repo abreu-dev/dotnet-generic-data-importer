@@ -1,4 +1,4 @@
-﻿using GenericImporter.Domain.Core.Interfaces;
+﻿using Core.Domain.Interfaces;
 using GenericImporter.Domain.Entities;
 
 namespace GenericImporter.Domain.Interfaces

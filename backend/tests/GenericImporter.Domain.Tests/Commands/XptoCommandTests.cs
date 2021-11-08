@@ -1,5 +1,5 @@
 ﻿using GenericImporter.Domain.Commands.XptoCommands;
-using GenericImporter.Domain.Core.Common;
+using Core.Domain.Common;
 using GenericImporter.Domain.Entities;
 using System.Linq;
 using Xunit;

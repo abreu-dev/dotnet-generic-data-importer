@@ -1,4 +1,4 @@
-﻿using GenericImporter.Application.Core.DataTransferObjects;
+﻿using Core.Application.DataTransferObjects;
 
 namespace GenericImporter.Application.DataTransferObjects.XptoDtos
 {

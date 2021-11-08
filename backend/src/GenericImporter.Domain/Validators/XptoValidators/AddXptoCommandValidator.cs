@@ -1,7 +1,7 @@
 ﻿using FluentValidation;
 using GenericImporter.Domain.Commands.XptoCommands;
-using GenericImporter.Domain.Core.Common;
-using GenericImporter.Domain.Core.Validators;
+using Core.Domain.Common;
+using Core.Domain.Validators;
 
 namespace GenericImporter.Domain.Validators.XptoValidators
 {

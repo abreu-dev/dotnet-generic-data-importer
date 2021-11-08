@@ -1,7 +1,7 @@
 ﻿using GenericImporter.Domain.Entities;
 using GenericImporter.Domain.Interfaces;
 using GenericImporter.Infra.Data.Contexts;
-using GenericImporter.Infra.Data.Core.Repositories;
+using Core.Infra.Data.Repositories;
 
 namespace GenericImporter.Infra.Data.Repositories
 {

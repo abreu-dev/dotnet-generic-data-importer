@@ -1,7 +1,7 @@
 ﻿using GenericImporter.Application.DataTransferObjects.XptoDtos;
 using GenericImporter.Application.Interfaces;
-using GenericImporter.Domain.Core.Notifications;
-using GenericImporter.Web.Core.Controllers;
+using Core.Domain.Notifications;
+using Core.API.Controllers;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System;

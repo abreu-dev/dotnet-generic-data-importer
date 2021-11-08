@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
@@ -6,7 +6,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\GenericImporter.Domain\GenericImporter.Domain.csproj" />
-    <ProjectReference Include="..\GenericImporter.Infra.Data.Core\GenericImporter.Infra.Data.Core.csproj" />
+    <ProjectReference Include="..\Core.Infra.Data\Core.Infra.Data.csproj" />
   </ItemGroup>
 
 </Project>

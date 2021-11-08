@@ -2,8 +2,8 @@
 using GenericImporter.Application.Services;
 using GenericImporter.Domain.CommandHandlers;
 using GenericImporter.Domain.Commands.XptoCommands;
-using GenericImporter.Domain.Core.Mediator;
-using GenericImporter.Domain.Core.Notifications;
+using Core.Domain.Mediator;
+using Core.Domain.Notifications;
 using GenericImporter.Domain.Interfaces;
 using GenericImporter.Infra.Data.Contexts;
 using GenericImporter.Infra.Data.Repositories;

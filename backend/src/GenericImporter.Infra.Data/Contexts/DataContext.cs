@@ -1,5 +1,5 @@
 ﻿using GenericImporter.Domain.Entities;
-using GenericImporter.Infra.Data.Core.Contexts;
+using Core.Infra.Data.Contexts;
 using GenericImporter.Infra.Data.Mappings;
 using Microsoft.EntityFrameworkCore;
 

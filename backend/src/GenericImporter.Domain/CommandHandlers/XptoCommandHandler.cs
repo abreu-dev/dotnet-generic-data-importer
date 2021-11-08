@@ -1,8 +1,8 @@
 ﻿using GenericImporter.Domain.Commands.XptoCommands;
-using GenericImporter.Domain.Core.CommandHandlers;
-using GenericImporter.Domain.Core.Common;
-using GenericImporter.Domain.Core.Mediator;
-using GenericImporter.Domain.Core.Notifications;
+using Core.Domain.CommandHandlers;
+using Core.Domain.Common;
+using Core.Domain.Mediator;
+using Core.Domain.Notifications;
 using GenericImporter.Domain.Interfaces;
 using MediatR;
 using System.Linq;

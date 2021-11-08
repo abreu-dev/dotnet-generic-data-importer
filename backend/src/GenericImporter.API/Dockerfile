@@ -9,12 +9,12 @@ WORKDIR /src
 COPY ["src/GenericImporter.API/GenericImporter.API.csproj", "src/GenericImporter.API/"]
 COPY ["src/GenericImporter.Infra.CrossCutting.IoC/GenericImporter.Infra.CrossCutting.IoC.csproj", "src/GenericImporter.Infra.CrossCutting.IoC/"]
 COPY ["src/GenericImporter.Application/GenericImporter.Application.csproj", "src/GenericImporter.Application/"]
-COPY ["src/GenericImporter.Application.Core/GenericImporter.Application.Core.csproj", "src/GenericImporter.Application.Core/"]
-COPY ["src/GenericImporter.Domain.Core/GenericImporter.Domain.Core.csproj", "src/GenericImporter.Domain.Core/"]
+COPY ["src/Core.Application/Core.Application.csproj", "src/Core.Application/"]
+COPY ["src/Core.Domain/Core.Domain.csproj", "src/Core.Domain/"]
 COPY ["src/GenericImporter.Domain/GenericImporter.Domain.csproj", "src/GenericImporter.Domain/"]
 COPY ["src/GenericImporter.Infra.Data/GenericImporter.Infra.Data.csproj", "src/GenericImporter.Infra.Data/"]
-COPY ["src/GenericImporter.Infra.Data.Core/GenericImporter.Infra.Data.Core.csproj", "src/GenericImporter.Infra.Data.Core/"]
-COPY ["src/GenericImporter.Web.Core/GenericImporter.Web.Core.csproj", "src/GenericImporter.Web.Core/"]
+COPY ["src/Core.Infra.Data/Core.Infra.Data.csproj", "src/Core.Infra.Data/"]
+COPY ["src/Core.API/Core.API.csproj", "src/Core.API/"]
 RUN dotnet restore "src/GenericImporter.API/GenericImporter.API.csproj"
 COPY . .
 WORKDIR "/src/src/GenericImporter.API"

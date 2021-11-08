@@ -1,9 +1,9 @@
 ﻿using GenericImporter.Domain.CommandHandlers;
 using GenericImporter.Domain.Commands.XptoCommands;
-using GenericImporter.Domain.Core.Common;
-using GenericImporter.Domain.Core.Interfaces;
-using GenericImporter.Domain.Core.Mediator;
-using GenericImporter.Domain.Core.Notifications;
+using Core.Domain.Common;
+using Core.Domain.Interfaces;
+using Core.Domain.Mediator;
+using Core.Domain.Notifications;
 using GenericImporter.Domain.Entities;
 using GenericImporter.Domain.Interfaces;
 using Moq;

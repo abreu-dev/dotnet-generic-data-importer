@@ -3,7 +3,7 @@ using GenericImporter.Application.DataTransferObjects.XptoDtos;
 using GenericImporter.Application.Interfaces;
 using GenericImporter.Application.Services;
 using GenericImporter.Domain.Commands.XptoCommands;
-using GenericImporter.Domain.Core.Mediator;
+using Core.Domain.Mediator;
 using GenericImporter.Domain.Entities;
 using GenericImporter.Domain.Interfaces;
 using Moq;

@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
-using GenericImporter.Application.Core.Services;
+using Core.Application.Services;
 using GenericImporter.Application.DataTransferObjects.XptoDtos;
 using GenericImporter.Application.Interfaces;
 using GenericImporter.Domain.Commands.XptoCommands;
-using GenericImporter.Domain.Core.Mediator;
+using Core.Domain.Mediator;
 using GenericImporter.Domain.Entities;
 using GenericImporter.Domain.Interfaces;
 using System.Threading.Tasks;

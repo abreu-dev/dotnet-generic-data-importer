@@ -1,4 +1,4 @@
-﻿using GenericImporter.Domain.Core.Entities;
+﻿using Core.Domain.Entities;
 
 namespace GenericImporter.Domain.Entities
 {

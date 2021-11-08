@@ -1,4 +1,4 @@
-﻿using GenericImporter.Domain.Core.Commands;
+﻿using Core.Domain.Commands;
 using GenericImporter.Domain.Entities;
 using GenericImporter.Domain.Validators.XptoValidators;
 using System;
