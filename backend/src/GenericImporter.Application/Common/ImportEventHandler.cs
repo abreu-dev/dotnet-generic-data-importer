@@ -2,6 +2,7 @@
 using GenericImporter.Domain.Core.Common;
 using GenericImporter.Domain.Core.Mediator;
 using GenericImporter.Domain.Core.Notifications;
+using GenericImporter.Domain.Entities;
 using GenericImporter.Domain.Events.ImportEvents;
 using GenericImporter.Domain.Interfaces;
 using MediatR;
@@ -62,6 +63,31 @@ namespace GenericImporter.Application.Common
             await (invoke as Task);
         }
 
+        private async Task ProcessImportItem(ImportItem item, 
+                                             ImportLayout layout, 
+                                             Type entityType,
+                                             object classToUse,
+                                             string methodToUse)
+        {
+            var splitted = item.ImportFileLine.Split(layout.Separator);
+            var entity = Activator.CreateInstance(entityType);
+
+            foreach (var column in layout.ImportLayoutColumns)
+            {
+                var property = FindPropertyInfoByImportFieldAttributeName(entityType, column.Name);
+                property.SetValue(entity, splitted[column.Position - 1]);
+            }
+
+            await CallMethod(classToUse, entity, methodToUse);
+
+            if (_notifications.HasNotifications())
+            {
+                item.Error = string.Join(", ", _notifications.GetNotifications().Select(c => c.Value));
+            }
+
+            item.Processed = true;
+        }
+
         public async Task Handle(ImportAddedEvent notification, CancellationToken cancellationToken)
         {
             var import = await _importRepository.GetById(notification.AggregateId);
@@ -69,28 +95,11 @@ namespace GenericImporter.Application.Common
             var entityType = Type.GetType(import.ImportLayout.ImportLayoutEntity.GetDescription());
             var customAttribute = entityType.GetCustomAttributes(typeof(ImportClassAttribute), false).SingleOrDefault();
             var classAttribute = (ImportClassAttribute)customAttribute;
-            var appService = _serviceProvider.GetRequiredService(classAttribute.ClassToUse);
+            var classToUse = _serviceProvider.GetRequiredService(classAttribute.ClassToUse);
 
             foreach (var item in import.ImportItems)
             {
-                var splited = item.ImportFileLine.Split(import.ImportLayout.Separator);
-                var entity = Activator.CreateInstance(entityType);
-
-                foreach (var column in import.ImportLayout.ImportLayoutColumns)
-                {
-                    var property = FindPropertyInfoByImportFieldAttributeName(entityType, column.Name);
-                    property.SetValue(entity, splited[column.Position - 1]);
-                }
-
-                await CallMethod(appService, entity, classAttribute.MethodToUse);
-
-                if (_notifications.HasNotifications())
-                {
-                    item.Error = string.Join(", ", _notifications.GetNotifications().Select(c => c.Value));
-                }
-
-                item.Processed = true;
-
+                await ProcessImportItem(item, import.ImportLayout, entityType, classToUse, classAttribute.MethodToUse);
                 _notifications.ClearNotifications();
             }
 
