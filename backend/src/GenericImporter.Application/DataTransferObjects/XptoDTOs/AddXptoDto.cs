@@ -4,7 +4,8 @@ using GenericImporter.Domain.Common;
 
 namespace GenericImporter.Application.DataTransferObjects.XptoDtos
 {
-    [ImportClass(ServiceToUse = typeof(IXptoAppService))]
+    [ImportClass(ClassToUse = typeof(IXptoAppService),
+                 MethodToUse = "Add")]
     public class AddXptoDto : DataTransferObject
     {
         [ImportField(Name = "Name")]

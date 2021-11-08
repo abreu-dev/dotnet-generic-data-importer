@@ -51,11 +51,11 @@ namespace GenericImporter.Application.Common
             return null;
         }
 
-        private async Task CallMethod(object service, object entity)
+        private async Task CallMethod(object service, object entity, string methodName)
         {
             const BindingFlags flags = BindingFlags.Public | BindingFlags.FlattenHierarchy | BindingFlags.Instance;
 
-            var methodToExecute = service.GetType().GetMethods(flags).SingleOrDefault(x => x.Name == "Add");
+            var methodToExecute = service.GetType().GetMethods(flags).SingleOrDefault(x => x.Name == methodName);
             var parameter = Convert.ChangeType(entity, entity.GetType());
 
             var invoke = methodToExecute.Invoke(service, new object[] { parameter });
@@ -69,7 +69,7 @@ namespace GenericImporter.Application.Common
             var entityType = Type.GetType(import.ImportLayout.ImportLayoutEntity.GetDescription());
             var customAttribute = entityType.GetCustomAttributes(typeof(ImportClassAttribute), false).SingleOrDefault();
             var classAttribute = (ImportClassAttribute)customAttribute;
-            var appService = _serviceProvider.GetRequiredService(classAttribute.ServiceToUse);
+            var appService = _serviceProvider.GetRequiredService(classAttribute.ClassToUse);
 
             foreach (var item in import.ImportItems)
             {
@@ -82,7 +82,7 @@ namespace GenericImporter.Application.Common
                     property.SetValue(entity, splited[column.Position - 1]);
                 }
 
-                await CallMethod(appService, entity);
+                await CallMethod(appService, entity, classAttribute.MethodToUse);
 
                 if (_notifications.HasNotifications())
                 {
