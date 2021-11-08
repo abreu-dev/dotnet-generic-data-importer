@@ -30,7 +30,10 @@ namespace GenericImporter.Application.Tests.AutoMapper
             {
                 Id = Guid.NewGuid(),
                 Code = 1,
-                Name = "Xpto"
+                Name = "Xpto",
+                Date = DateTime.Now,
+                Version = 1,
+                Value = 1
             };
 
             // Act
@@ -41,6 +44,9 @@ namespace GenericImporter.Application.Tests.AutoMapper
             Assert.Equal(xpto.Id, result.Id);
             Assert.Equal(xpto.Code, result.Code);
             Assert.Equal(xpto.Name, result.Name);
+            Assert.Equal(xpto.Date, result.Date);
+            Assert.Equal(xpto.Version, result.Version);
+            Assert.Equal(xpto.Value, result.Value);
         }
 
         [Fact(DisplayName = "Map_ShouldMapImportLayoutToImportLayoutDto")]

@@ -1,6 +1,7 @@
 ﻿using GenericImporter.Domain.Commands.XptoCommands;
 using GenericImporter.Domain.Core.Common;
 using GenericImporter.Domain.Entities;
+using System;
 using System.Linq;
 using Xunit;
 
@@ -17,7 +18,10 @@ namespace GenericImporter.Domain.Tests.Commands
             {
                 Entity = new Xpto()
                 {
-                    Name = ""
+                    Name = "",
+                    Date = DateTime.Now,
+                    Version = 1,
+                    Value = 1
                 }
             };
 
@@ -38,7 +42,10 @@ namespace GenericImporter.Domain.Tests.Commands
             {
                 Entity = new Xpto()
                 {
-                    Name = "Xpto"
+                    Name = "Xpto",
+                    Date = DateTime.Now,
+                    Version = 1,
+                    Value = 1
                 }
             };
 

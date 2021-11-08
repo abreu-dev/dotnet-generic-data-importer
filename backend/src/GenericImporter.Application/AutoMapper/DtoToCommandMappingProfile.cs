@@ -24,7 +24,11 @@ namespace GenericImporter.Application.AutoMapper
         private void CreateXptoMap()
         {
             CreateMap<AddXptoDto, AddXptoCommand>()
-                .ForMember(d => d.Entity, o => o.MapFrom(s => new Xpto() { Name = s.Name }));
+                .ForMember(d => d.Entity, o => o.MapFrom(s => new Xpto()))
+                .ForPath(d => d.Entity.Name, o => o.MapFrom(s => s.Name))
+                .ForPath(d => d.Entity.Date, o => o.MapFrom(s => s.Date))
+                .ForPath(d => d.Entity.Version, o => o.MapFrom(s => s.Version))
+                .ForPath(d => d.Entity.Value, o => o.MapFrom(s => s.Value));
         }
 
         private void CreateImportLayoutMap()

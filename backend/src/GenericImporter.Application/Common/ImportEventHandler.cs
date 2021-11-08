@@ -8,6 +8,7 @@ using GenericImporter.Domain.Interfaces;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using System;
+using System.Globalization;
 using System.Linq;
 using System.Reflection;
 using System.Threading;
@@ -72,10 +73,75 @@ namespace GenericImporter.Application.Common
             var splitted = item.ImportFileLine.Split(layout.Separator);
             var entity = Activator.CreateInstance(entityType);
 
+            if (splitted.Length != layout.ImportLayoutColumns.Count())
+            {
+                item.Error = $"ImportFileLine columns ({splitted.Length}) not the same as layout ({layout.ImportLayoutColumns.Count()})";
+                item.Processed = true;
+                return;
+            }
+
             foreach (var column in layout.ImportLayoutColumns)
             {
                 var property = FindPropertyInfoByImportFieldAttributeName(entityType, column.Name);
-                property.SetValue(entity, splitted[column.Position - 1]);
+
+                if (typeof(DateTime) == property.PropertyType)
+                {
+                    try
+                    {
+                        property.SetValue(entity, DateTime.ParseExact(splitted[column.Position - 1], "ddMMyyyyHHmm", CultureInfo.InvariantCulture));
+                    }
+                    catch (FormatException)
+                    {
+                        item.Error = $"Column '{column.Name}' have type '{property.PropertyType}' and the value informed for it is not valid.";
+                        item.Processed = true;
+                        return;
+                    }
+                }
+                else if (typeof(int) == property.PropertyType)
+                {
+                    try
+                    {
+                        property.SetValue(entity, int.Parse(splitted[column.Position - 1], CultureInfo.InvariantCulture));
+                    }
+                    catch (FormatException)
+                    {
+                        item.Error = $"Column '{column.Name}' have type '{property.PropertyType}' and the value informed for it is not valid.";
+                        item.Processed = true;
+                        return;
+                    }
+                }
+                else if (typeof(double) == property.PropertyType)
+                {
+                    try
+                    {
+                        property.SetValue(entity, double.Parse(splitted[column.Position - 1], CultureInfo.InvariantCulture));
+                    }
+                    catch (FormatException)
+                    {
+                        item.Error = $"Column '{column.Name}' have type '{property.PropertyType}' and the value informed for it is not valid.";
+                        item.Processed = true;
+                        return;
+                    }
+                }
+                else if (typeof(string) == property.PropertyType)
+                {
+                    try
+                    {
+                        property.SetValue(entity, splitted[column.Position - 1]);
+                    }
+                    catch (FormatException)
+                    {
+                        item.Error = $"Column '{column.Name}' have type '{property.PropertyType}' and the value informed for it is not valid.";
+                        item.Processed = true;
+                        return;
+                    }
+                }
+                else
+                {
+                    item.Error = $"Column '{column.Name}' have type '{property.PropertyType}', but it is not configured for import.";
+                    item.Processed = true;
+                    return;
+                }
             }
 
             await CallMethod(classToUse, entity, methodToUse);

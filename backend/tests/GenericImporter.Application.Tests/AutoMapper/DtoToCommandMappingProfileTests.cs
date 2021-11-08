@@ -31,7 +31,10 @@ namespace GenericImporter.Application.Tests.AutoMapper
             // Arrange
             var addXptoDto = new AddXptoDto()
             {
-                Name = "Xpto"
+                Name = "Xpto",
+                Date = DateTime.Now,
+                Version = 1,
+                Value = 1
             };
 
             // Act
@@ -40,6 +43,9 @@ namespace GenericImporter.Application.Tests.AutoMapper
             // Assert
             Assert.NotNull(result);
             Assert.Equal(addXptoDto.Name, result.Entity.Name);
+            Assert.Equal(addXptoDto.Date, result.Entity.Date);
+            Assert.Equal(addXptoDto.Version, result.Entity.Version);
+            Assert.Equal(addXptoDto.Value, result.Entity.Value);
         }
 
         [Fact(DisplayName = "Map_ShouldMapAddImportLayoutDtoToAddImportLayoutCommand")]

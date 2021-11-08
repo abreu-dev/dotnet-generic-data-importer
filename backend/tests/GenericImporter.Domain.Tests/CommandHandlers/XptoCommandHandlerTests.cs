@@ -43,7 +43,10 @@ namespace GenericImporter.Domain.Tests.CommandHandlers
             {
                 Entity = new Xpto()
                 {
-                    Name = ""
+                    Name = "",
+                    Date = DateTime.Now,
+                    Version = 1,
+                    Value = 1
                 }
             };
 
@@ -64,7 +67,10 @@ namespace GenericImporter.Domain.Tests.CommandHandlers
             {
                 Entity = new Xpto()
                 {
-                    Name = "Xpto"
+                    Name = "Xpto",
+                    Date = DateTime.Now,
+                    Version = 1,
+                    Value = 1
                 }
             };
 
@@ -88,7 +94,10 @@ namespace GenericImporter.Domain.Tests.CommandHandlers
             {
                 Entity = new Xpto()
                 {
-                    Name = "Xpto"
+                    Name = "Xpto",
+                    Date = DateTime.Now,
+                    Version = 1,
+                    Value = 1
                 }
             };
 
