@@ -1,11 +1,10 @@
-﻿using Something.Domain.Commands.XptoCommands;
-using Core.Domain.CommandHandlers;
-using Core.Domain.Common;
+﻿using Core.Domain.CommandHandlers;
 using Core.Domain.Mediator;
 using Core.Domain.Notifications;
-using Something.Domain.Interfaces;
 using MediatR;
-using System.Linq;
+using Something.Domain.Commands.XptoCommands;
+using Something.Domain.Interfaces;
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -28,22 +27,24 @@ namespace Something.Domain.CommandHandlers
 
         public async Task<Unit> Handle(AddXptoCommand request, CancellationToken cancellationToken)
         {
-            if (!request.IsValid())
-            {
-                await PublishValidationErrors(request);
-                return Unit.Value;
-            }
+            Console.WriteLine($"Name = {request.Entity.Name}");
 
-            if ((await _xptoRepository.Search(x => x.Name == request.Entity.Name)).Any())
-            {
-                await _mediatorHandler.PublishDomainNotification(new DomainNotification(request.MessageType,
-                    DomainMessages.AlreadyInUse.Format("Name").Message));
-                return Unit.Value;
-            }
+            //if (!request.IsValid())
+            //{
+            //    await PublishValidationErrors(request);
+            //    return Unit.Value;
+            //}
 
-            _xptoRepository.Add(request.Entity);
+            //if ((await _xptoRepository.Search(x => x.Name == request.Entity.Name)).Any())
+            //{
+            //    await _mediatorHandler.PublishDomainNotification(new DomainNotification(request.MessageType,
+            //        DomainMessages.AlreadyInUse.Format("Name").Message));
+            //    return Unit.Value;
+            //}
 
-            await Commit(_xptoRepository.UnitOfWork);
+            //_xptoRepository.Add(request.Entity);
+
+            //await Commit(_xptoRepository.UnitOfWork);
 
             return Unit.Value;
         }

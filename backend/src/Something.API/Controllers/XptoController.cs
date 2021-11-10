@@ -1,9 +1,9 @@
-﻿using Something.Application.DataTransferObjects.XptoDtos;
-using Something.Application.Interfaces;
+﻿using Core.API.Controllers;
 using Core.Domain.Notifications;
-using Core.API.Controllers;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Something.Application.DataTransferObjects.XptoDtos;
+using Something.Application.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -37,6 +37,13 @@ namespace Something.API.Controllers
         public async Task<IActionResult> Add([FromBody] AddXptoDto addXptoDto)
         {
             await _xptoAppService.Add(addXptoDto);
+            return Response();
+        }
+
+        [HttpPost("import")]
+        public async Task<IActionResult> Import([FromBody] AddXptoDto content)
+        {
+            await _xptoAppService.Import(content.Name);
             return Response();
         }
     }

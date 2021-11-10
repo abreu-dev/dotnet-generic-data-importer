@@ -9,6 +9,7 @@ using Something.Infra.Data.Contexts;
 using Something.Infra.Data.Repositories;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
+using GenericImporter.Service.Helpers;
 
 namespace Something.Infra.CrossCutting.IoC
 {
@@ -19,6 +20,7 @@ namespace Something.Infra.CrossCutting.IoC
         {
             // Domain - Bus (Mediator)
             services.AddScoped<IMediatorHandler, MediatorHandler>();
+            services.AddScoped<IImportAttributeHelper, ImportAttributeHelper>();
 
             // Domain - Notifications
             services.AddScoped<INotificationHandler<DomainNotification>, DomainNotificationHandler>();
