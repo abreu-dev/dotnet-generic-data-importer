@@ -1,4 +1,5 @@
 ﻿using GenericImporter.Service.Attributes;
+using System;
 
 namespace GenericImporter.Service.Tests.Helpers
 {
@@ -40,5 +41,14 @@ namespace GenericImporter.Service.Tests.Helpers
         {
             Name = name;
         }
+    }
+
+    public class MyClassWithProperties
+    {
+        public string StringProperty { get; set; }
+        public int IntProperty { get; set; }
+        public double DoubleProperty { get; set; }
+        public DateTime DateTimeProperty { get; set; }
+        public Guid GuidProperty { get; set; }
     }
 }

@@ -1,15 +1,14 @@
-﻿using Something.Application.Interfaces;
+﻿using Core.Domain.Mediator;
+using Core.Domain.Notifications;
+using MediatR;
+using Microsoft.Extensions.DependencyInjection;
+using Something.Application.Interfaces;
 using Something.Application.Services;
 using Something.Domain.CommandHandlers;
 using Something.Domain.Commands.XptoCommands;
-using Core.Domain.Mediator;
-using Core.Domain.Notifications;
 using Something.Domain.Interfaces;
 using Something.Infra.Data.Contexts;
 using Something.Infra.Data.Repositories;
-using MediatR;
-using Microsoft.Extensions.DependencyInjection;
-using GenericImporter.Service.Helpers;
 
 namespace Something.Infra.CrossCutting.IoC
 {
@@ -20,7 +19,6 @@ namespace Something.Infra.CrossCutting.IoC
         {
             // Domain - Bus (Mediator)
             services.AddScoped<IMediatorHandler, MediatorHandler>();
-            services.AddScoped<IImportAttributeHelper, ImportAttributeHelper>();
 
             // Domain - Notifications
             services.AddScoped<INotificationHandler<DomainNotification>, DomainNotificationHandler>();

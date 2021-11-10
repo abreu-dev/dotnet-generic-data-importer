@@ -2,7 +2,7 @@
 using Core.Application.Services;
 using Core.Domain.Common;
 using Core.Domain.Mediator;
-using GenericImporter.Service.Helpers;
+using GenericImporter.Service.Extensions;
 using Something.Application.DataTransferObjects.XptoDtos;
 using Something.Application.Interfaces;
 using Something.Domain.Commands.XptoCommands;
@@ -31,6 +31,15 @@ namespace Something.Application.Services
             _mapper = mapper;
             _mediator = mediator;
             _serviceProvider = serviceProvider;
+        }
+
+        public XptoAppService(IMapper mapper,
+                              IMediatorHandler mediator,
+                              IXptoRepository xptoRepository)
+            : base(mapper, xptoRepository)
+        {
+            _mapper = mapper;
+            _mediator = mediator;
         }
 
         public override async Task Add(AddXptoDto addXptoDto)
