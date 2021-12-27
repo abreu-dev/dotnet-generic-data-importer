@@ -66,7 +66,7 @@ namespace Something.Application.Services
                     property.SetValueByString(instance, splitted[column.index]);
                 }
 
-                service.CallMethod(classAttribute.Method, instance);
+                await service.CallMethod(classAttribute.Method, instance);
             }
         }
     }
