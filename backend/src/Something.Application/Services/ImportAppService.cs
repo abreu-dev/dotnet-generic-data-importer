@@ -3,10 +3,10 @@ using Core.Application.Services;
 using Core.Domain.Common;
 using Core.Domain.Mediator;
 using Core.Domain.Notifications;
+using GenericImporter.Service.Exceptions;
 using GenericImporter.Service.Extensions;
 using MediatR;
 using Something.Application.DataTransferObjects.ImportDTOs;
-using Something.Application.DataTransferObjects.XptoDtos;
 using Something.Application.Interfaces;
 using Something.Domain.Commands.ImportCommands;
 using Something.Domain.Entities;
@@ -60,19 +60,37 @@ namespace Something.Application.Services
             foreach (var item in import.ImportItems)
             {
                 var splitted = item.ImportFileLine.Split(";");
-                var instance = importObjectType.CreateInstance();
 
-                foreach (var column in importColumns)
+                if (splitted.Length != importColumns.Count())
                 {
-                    var property = importObjectType.GetPropertyByImportName(column.Name);
-                    property.SetValueByString(instance, splitted[column.Position - 1]);
+                    item.Error = string.Join(", ", "Line doesn't have the same columns as Layout.");
                 }
-
-                await service.CallMethod(classAttribute.Method, instance);
-
-                if (_notifications.HasNotifications())
+                else
                 {
-                    item.Error = string.Join(", ", _notifications.GetNotifications().Select(c => c.Value));
+                    var instance = importObjectType.CreateInstance();
+
+                    foreach (var column in importColumns)
+                    {
+                        try
+                        {
+                            var property = importObjectType.GetPropertyByImportName(column.Name);
+                            property.SetValueByString(instance, splitted[column.Position - 1], column.Format);
+                        }
+                        catch (ImporterException ex) 
+                        {
+                            item.Error = ex.Message;    
+                        }
+                    }
+
+                    if (string.IsNullOrEmpty(item.Error))
+                    {
+                        await service.CallMethod(classAttribute.Method, instance);
+
+                        if (_notifications.HasNotifications())
+                        {
+                            item.Error = string.Join(", ", _notifications.GetNotifications().Select(c => c.Value));
+                        }
+                    }
                 }
 
                 item.Processed = true;

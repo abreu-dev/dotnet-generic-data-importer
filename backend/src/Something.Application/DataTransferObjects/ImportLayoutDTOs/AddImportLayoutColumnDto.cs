@@ -6,5 +6,7 @@ namespace Something.Application.DataTransferObjects.ImportLayoutDTOs
     {
         public string Name { get; set; }
         public int Position { get; set; }
+        public string Format { get; set; }
+
     }
 }

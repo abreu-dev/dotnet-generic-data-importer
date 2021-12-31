@@ -24,7 +24,13 @@ namespace Something.Application.AutoMapper
         private void CreateXptoMap()
         {
             CreateMap<AddXptoDto, AddXptoCommand>()
-                .ForMember(d => d.Entity, o => o.MapFrom(s => new Xpto() { Name = s.Name }));
+                .ForMember(d => d.Entity, o => o.MapFrom(s => new Xpto() 
+                { 
+                    Name = s.Name,
+                    Date = s.Date,
+                    Version = s.Version,
+                    Value = s.Value
+                }));
         }
 
         private void CreateImportLayoutMap()
@@ -37,7 +43,8 @@ namespace Something.Application.AutoMapper
                 .ForPath(d => d.Entity.Columns, o => o.MapFrom(s => s.Columns.Select(s2 => new ImportLayoutColumn
                 {
                     Name = s2.Name,
-                    Position = s2.Position
+                    Position = s2.Position,
+                    Format = s2.Format,
                 })));
         }
 

@@ -141,6 +141,14 @@ namespace Something.Domain.CommandHandlers
                         if (fieldAttribute.Name == column.Name)
                         {
                             columnWasFound = true;
+                            
+                            if (property.PropertyType == typeof(DateTime) && string.IsNullOrEmpty(column.Format))
+                            {
+                                await _mediatorHandler.PublishDomainNotification(new DomainNotification(messageType,
+                                    $"Column name '{column.Name}' must have a format."));
+                                return false;
+                            }    
+
                             break;
                         }
                     }
