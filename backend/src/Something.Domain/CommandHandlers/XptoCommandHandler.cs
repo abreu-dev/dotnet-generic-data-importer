@@ -1,10 +1,10 @@
-﻿using Something.Domain.Commands.XptoCommands;
-using Core.Domain.CommandHandlers;
+﻿using Core.Domain.CommandHandlers;
 using Core.Domain.Common;
 using Core.Domain.Mediator;
 using Core.Domain.Notifications;
-using Something.Domain.Interfaces;
 using MediatR;
+using Something.Domain.Commands.XptoCommands;
+using Something.Domain.Interfaces;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;

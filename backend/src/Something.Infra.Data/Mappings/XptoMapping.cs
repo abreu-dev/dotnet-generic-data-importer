@@ -20,6 +20,18 @@ namespace Something.Infra.Data.Mappings
             builder.Property(x => x.Name)
                 .HasColumnName("Name")
                 .IsRequired();
+
+            builder.Property(x => x.Date)
+                .HasColumnName("Date")
+                .IsRequired();
+
+            builder.Property(x => x.Version)
+                .HasColumnName("Version")
+                .IsRequired();
+
+            builder.Property(x => x.Value)
+                .HasColumnName("Value")
+                .IsRequired();
         }
     }
 }

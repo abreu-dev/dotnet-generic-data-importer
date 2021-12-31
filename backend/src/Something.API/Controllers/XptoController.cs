@@ -1,9 +1,9 @@
-﻿using Something.Application.DataTransferObjects.XptoDtos;
-using Something.Application.Interfaces;
+﻿using Core.API.Controllers;
 using Core.Domain.Notifications;
-using Core.API.Controllers;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Something.Application.DataTransferObjects.XptoDtos;
+using Something.Application.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
