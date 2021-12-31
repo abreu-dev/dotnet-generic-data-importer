@@ -39,12 +39,5 @@ namespace Something.API.Controllers
             await _xptoAppService.Add(addXptoDto);
             return Response();
         }
-
-        [HttpPost("import")]
-        public async Task<IActionResult> Import([FromBody] AddXptoDto content)
-        {
-            await _xptoAppService.Import(content.Name);
-            return Response();
-        }
     }
 }

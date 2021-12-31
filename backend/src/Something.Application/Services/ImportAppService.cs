@@ -59,11 +59,11 @@ namespace Something.Application.Services
 
             foreach (var item in import.ImportItems)
             {
-                var splitted = item.ImportFileLine.Split(";");
+                var splitted = item.ImportFileLine.Split(import.ImportLayout.Separator);
 
                 if (splitted.Length != importColumns.Count())
                 {
-                    item.Error = string.Join(", ", "Line doesn't have the same columns as Layout.");
+                    item.Error = string.Join(", ", "Item doesn't have the same columns as Layout.");
                 }
                 else
                 {

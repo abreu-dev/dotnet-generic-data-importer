@@ -64,7 +64,10 @@ namespace Something.Domain.Tests.CommandHandlers
             {
                 Entity = new Xpto()
                 {
-                    Name = "Xpto"
+                    Name = "Xpto",
+                    Version = 1,
+                    Value = 1.0,
+                    Date = DateTime.UtcNow
                 }
             };
 
@@ -88,7 +91,10 @@ namespace Something.Domain.Tests.CommandHandlers
             {
                 Entity = new Xpto()
                 {
-                    Name = "Xpto"
+                    Name = "Xpto",
+                    Version = 1,
+                    Value = 1.0,
+                    Date = DateTime.UtcNow
                 }
             };
 
